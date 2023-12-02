@@ -1,0 +1,28 @@
+@import "../../../scss/index.scss";
+
+// Mobile First Approach
+.root {
+  background-color: $blue;
+  border: none;
+  outline: none;
+  font-size: toVw(14);
+  cursor: pointer;
+  color: $white;
+  padding: 10px 20px;
+  transition: .3s all ease-in-out;
+  border: 1px solid;
+  border-color: transparent;
+
+  &:hover {
+    color: $blue;
+    background-color: $white;
+    border-color: $blue;
+  }
+}
+
+// Always include desktop at bottom and build the components/pages
+@include desktop() {
+  .root {
+    font-size: toVwDesktop(18);
+  }
+}

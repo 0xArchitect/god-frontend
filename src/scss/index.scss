@@ -1,0 +1,24 @@
+@import "reset.scss";
+@import "variables.scss";
+@import "mixins.scss";
+
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: toVw(12);
+  padding-right: toVw(12);
+}
+
+@include desktop() {
+  .container {
+    max-width: toVwDesktop(1400);
+    padding-left: toVwDesktop(12);
+    padding-right: toVwDesktop(12);
+  }
+}

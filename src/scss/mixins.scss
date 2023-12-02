@@ -1,0 +1,51 @@
+@use "sass:map";
+
+$baseFontSize: 16;
+
+$designScreens: (
+  "lg": 1920,
+  "sm": 375,
+);
+
+$mobile-design-width: map-get(
+  $map: $designScreens,
+  $key: "sm",
+);
+$desktop-design-width: map-get(
+  $map: $designScreens,
+  $key: "lg",
+);
+
+$screens: (
+  "lg": 1200,
+  "sm": 360,
+);
+$mobile-width: map-get(
+  $map: $screens,
+  $key: "sm",
+);
+$desktop-width: map-get(
+  $map: $screens,
+  $key: "lg",
+);
+
+@function toVwDesktop($value: 16) {
+  $vwValue: ($value / $desktop-design-width) * 100 + vw;
+  @return $vwValue;
+}
+@function toVw($value: 16) {
+  $vwValue: ($value / $mobile-design-width) * 100 + vw;
+  @return $vwValue;
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$desktop-width}px) {
+    @content;
+  }
+}
