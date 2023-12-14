@@ -46,6 +46,8 @@
 
 .chatBox {
     margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
     div {
         font-size: 16px;
         line-height: 22px;
@@ -57,6 +59,7 @@
         margin-top: 24px;
         border-radius: 8px;
         position: relative;
+        align-self: start;
         @include mobile() {
           font-size: 14px;
           line-height: 20px;
@@ -67,6 +70,7 @@
         background-color: $white;
         color: #0F0F0F;
         float: right;
+        align-self: end;
         
     }
 }
@@ -123,4 +127,11 @@
     width: 15px;
     filter: brightness(0) invert(1);
   }
+}
+
+.stem-logo {
+  position: absolute;
+  bottom: 32px;
+  right: 0;
+  max-width: 160px;
 }
