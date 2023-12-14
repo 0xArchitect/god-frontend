@@ -1,0 +1,35 @@
+@import "../../scss/index.scss";
+
+
+.chat {
+    padding: 26px 90px;
+    @include tablet() {
+        padding: 20px;
+    }
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    max-width: 1128px;
+    margin: 0 auto;
+    >div:first-child{
+        @include tablet() {
+            display: none;
+        }
+    }
+    
+}
+.social {
+    background-color: rgba(53, 146, 255, .6);
+    padding: 6px 4px;
+    border-radius: 6px;
+    img {
+        // width: 30px;
+        padding: 0 8px;
+        box-sizing: border-box;
+    }
+}
