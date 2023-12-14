@@ -1,35 +1,75 @@
 @import "../../scss/index.scss";
 
-
 .chat {
-    padding: 26px 90px;
-    @include tablet() {
-        padding: 20px;
-    }
+  padding: 26px 90px;
+  @include tablet() {
+    padding: 20px;
+  }
 }
 .header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    max-width: 1128px;
-    margin: 0 auto;
-    >div:first-child{
-        @include tablet() {
-            display: none;
-        }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  max-width: 1128px;
+  margin: 0 auto;
+  > div:first-child {
+    @include tablet() {
+      display: none;
     }
-    
+  }
 }
 .social {
-    background-color: rgba(53, 146, 255, .6);
-    padding: 6px 4px;
-    border-radius: 6px;
-    img {
-        // width: 30px;
-        padding: 0 8px;
-        box-sizing: border-box;
-    }
+  background-color: rgba(53, 146, 255, 0.6);
+  padding: 6px 4px;
+  border-radius: 6px;
+  img {
+    // width: 30px;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+}
+
+.chatBoxContainer {
+  min-height: 70vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.chatBox {
+}
+
+.chatInputBox {
+  width: 100%;
+  display: flex;
+  padding: toVw(12) toVw(24);
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6.800000190734863px);
+  outline: none;
+  border: none;
+}
+
+.note {
+  padding: toVwDesktop(20) toVwDesktop(30);
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-family: Segoe UI, sans-serif;
+}
+
+@include desktop() {
+  .chatBoxContainer {
+    //   min-height: 90vh;
+    max-width: toVwDesktop(500);
+  }
+
+  .chatInputBox {
+    padding: toVwDesktop(20) toVwDesktop(30);
+  }
 }

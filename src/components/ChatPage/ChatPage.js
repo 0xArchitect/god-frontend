@@ -9,6 +9,7 @@ import telegram from './../../assets/images/telegram.svg'
 import vector from './../../assets/images/vector.svg'
 
 import { Link } from "react-router-dom";
+import ChatBox from './ChatBox';
 
 
 const ChatPage = () => {
@@ -30,6 +31,7 @@ const ChatPage = () => {
                     </div>
                 </div>
             </div>
+            <ChatBox />
         </div>
     );
 }
