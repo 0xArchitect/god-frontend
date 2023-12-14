@@ -3,6 +3,8 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 const ChatContext = createContext({});
 const { Provider } = ChatContext;
 
+const ENDPOINT = 'https://83f8-2405-201-1f-1161-9c9b-2da4-cf3b-73af.ngrok-free.app';
+
 export const useChatContext = () => {
   return useContext(ChatContext);
 }
@@ -23,7 +25,7 @@ export default function ChatProvider({ children }) {
     if (isLoading) return;
 
     setIsLoading(true)
-    fetch('https://83f8-2405-201-1f-1161-9c9b-2da4-cf3b-73af.ngrok-free.app/rest/chat', {
+    fetch(`${ENDPOINT}/rest/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -52,8 +54,9 @@ export default function ChatProvider({ children }) {
   }, [nextChatId, isLoading])
 
   const handleChatInput = useCallback((chat) => {
+    if (isLoading) return;
     triggerChat({ chat })
-  }, [])
+  }, [isLoading])
 
   const contextValue = {
     handleChatInput,
