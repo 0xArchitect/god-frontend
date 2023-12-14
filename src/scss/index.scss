@@ -28,7 +28,9 @@ img {
     padding-right: toVwDesktop(12);
   }
 }
-
+.relative {
+  position: relative;
+}
 .bg-image {
 	background-image: url(./../assets/images/bg-image.svg);
 	background-size: cover;

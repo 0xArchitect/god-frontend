@@ -1,35 +1,162 @@
 @import "../../scss/index.scss";
 
-
 .chat {
-    padding: 26px 90px;
-    @include tablet() {
-        padding: 20px;
-    }
+  padding: 26px 90px;
+  font-family: Segoe UI, sans-serif;
+  @include tablet() {
+    padding: 20px;
+  }
 }
 .header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    max-width: 1128px;
-    margin: 0 auto;
-    >div:first-child{
-        @include tablet() {
-            display: none;
-        }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  max-width: 1128px;
+  margin: 0 auto;
+  > div:first-child {
+    @include tablet() {
+      display: none;
     }
-    
+  }
 }
 .social {
-    background-color: rgba(53, 146, 255, .6);
-    padding: 6px 4px;
-    border-radius: 6px;
-    img {
-        // width: 30px;
-        padding: 0 8px;
-        box-sizing: border-box;
+  background-color: rgba(53, 146, 255, 0.6);
+  padding: 6px 4px;
+  border-radius: 6px;
+  img {
+    // width: 30px;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+}
+
+.chatBoxContainer {
+  min-height: 70vh;
+  max-height: 70vh;
+  margin: 0 auto;
+  overflow-y: scroll;
+  // display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.box {
+  // display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.chatBox {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    div {
+        font-size: 16px;
+        line-height: 22px;
+        padding: 12px 24px;
+        color: $white;
+        background-color: rgba(53, 146, 255, 0.6);
+        float: left;
+        max-width: calc(100% - 30px);
+        margin-top: 24px;
+        border-radius: 8px;
+        position: relative;
+        align-self: start;
+        @include mobile() {
+          font-size: 14px;
+          line-height: 20px;
+          padding: 12px 24px;
+        }
     }
+    .bg-white {
+        background-color: $white;
+        color: #0F0F0F;
+        float: right;
+        align-self: end;
+        
+    }
+}
+
+.chatInputBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: fixed;
+  width: 500px;
+  max-width: calc(100% - 40px);
+  bottom: 34px;
+  @include tablet() {
+    bottom: 64px;
+  }
+}
+.chatInput {
+    font-size: 16px;
+    line-height: 22px;
+    padding: 12px 24px;
+    width: calc(100% - 84px);
+    outline: none;
+    border: none;
+    border-radius: 8px;
+}
+
+.note {
+  padding: toVwDesktop(20) toVwDesktop(30);
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+@include desktop() {
+  .chatBoxContainer {
+    //   min-height: 90vh;
+    max-width: 500px;
+  }
+}
+
+.send-button {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.play-btn {
+  position: absolute;
+    background-color: rgba(53, 146, 255, 0.6);
+    right: -30px;
+    bottom: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  img {
+    height: 15px;
+    width: 15px;
+    filter: brightness(0) invert(1);
+  }
+}
+
+.stem-logo {
+  position: absolute;
+  bottom: -70px;
+  right: 0;
+  max-width: 160px;
+  @include tablet() {
+    bottom: -10px;
+  }
+
+}
+
+.cover {
+  // position: absolute;
 }
