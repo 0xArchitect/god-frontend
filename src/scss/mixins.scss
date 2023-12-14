@@ -19,8 +19,13 @@ $desktop-design-width: map-get(
 $screens: (
   "lg": 1200,
   "sm": 768,
+  "xs": 375
 );
 $mobile-width: map-get(
+  $map: $screens,
+  $key: "xs",
+);
+$tablet-width: map-get(
   $map: $screens,
   $key: "sm",
 );
@@ -40,6 +45,12 @@ $desktop-width: map-get(
 
 @mixin desktop {
   @media (min-width: #{$desktop-width}px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet-width}px) {
     @content;
   }
 }
