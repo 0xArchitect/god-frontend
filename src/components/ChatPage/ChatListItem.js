@@ -14,9 +14,6 @@ const ChatListItem = ({
     const playAudio = () => {
         setIsOn(!isOn)
     }
-    if(!chat){
-        return null
-    }
     return (
         <>
         {/* // <div className={styles.chatBox}> */}

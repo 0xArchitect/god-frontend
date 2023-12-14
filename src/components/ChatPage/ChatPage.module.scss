@@ -50,6 +50,7 @@
   max-width: 500px;
   margin: 0 auto;
   justify-content: flex-end;
+  position: relative;
 }
 
 .chatBox {
@@ -88,6 +89,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  position: fixed;
+  width: 500px;
+  max-width: calc(100% - 40px);
+  bottom: 34px;
+  @include tablet() {
+    bottom: 64px;
+  }
 }
 .chatInput {
     font-size: 16px;
@@ -140,7 +148,15 @@
 
 .stem-logo {
   position: absolute;
-  bottom: -32px;
+  bottom: -70px;
   right: 0;
   max-width: 160px;
+  @include tablet() {
+    bottom: -10px;
+  }
+
+}
+
+.cover {
+  // position: absolute;
 }

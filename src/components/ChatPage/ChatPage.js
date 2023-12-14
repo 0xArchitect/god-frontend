@@ -7,11 +7,11 @@ import avatar from './../../assets/images/avatar.svg'
 import twitter from './../../assets/images/twitter.svg'
 import telegram from './../../assets/images/telegram.svg'
 import vector from './../../assets/images/vector.svg'
-import stemLogo from './../../assets/images/stem.png'
+
 
 import { Link } from "react-router-dom";
 import ChatBox from './ChatBox';
-
+import stemLogo from './../../assets/images/stem.png'
 
 const ChatPage = () => {
     return (
@@ -33,7 +33,9 @@ const ChatPage = () => {
                 </div>
             </div>
             <ChatBox />
-            <div className='container relative'><img src={stemLogo} alt="Powered by STEM"  className={styles['stem-logo']} /></div>
+            <div className='container relative'>
+            <img src={stemLogo} alt="Powered by STEM"  className={styles['stem-logo']} />
+            </div>
         </div>
     );
 }
