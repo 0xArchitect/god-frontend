@@ -10,17 +10,23 @@
 .header {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
-  align-items: center;
-  max-width: 1128px;
+  width: 1128px;
+  max-width: calc(100% - 40px);
   margin: 0 auto;
-  > div:first-child {
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  
     @include tablet() {
-      display: none;
+      z-index: 999;
+      background: #fff;
+      box-shadow: 0 0 10px #fff;
+      padding: 20px 0;
+      top: 0;
     }
-  }
+  
 }
 .social {
   background-color: rgba(53, 146, 255, 0.6);
@@ -34,13 +40,14 @@
 }
 
 .chatBoxContainer {
-  min-height: 70vh;
-  max-height: 70vh;
+  // min-height: 70vh;
+  // max-height: 70vh;
   margin: 0 auto;
   overflow-y: scroll;
   // display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  max-width: 500px;
 }
 
 .box {
@@ -51,6 +58,9 @@
   margin: 0 auto;
   justify-content: flex-end;
   position: relative;
+  @include tablet {
+    padding-top: 80px;
+  }
 }
 
 .chatBox {
@@ -58,6 +68,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding-bottom: 100px;
+    @include tablet {
+      padding-bottom: 140px;
+    }
     div {
         font-size: 16px;
         line-height: 22px;
@@ -93,6 +107,8 @@
   width: 500px;
   max-width: calc(100% - 40px);
   bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
   @include tablet() {
     bottom: 64px;
   }
@@ -105,6 +121,8 @@
     outline: none;
     border: none;
     border-radius: 8px;
+    box-shadow: 30px 0px 32px 25px rgba(180, 224, 254, 0.6);
+    min-height: 80px;
 }
 
 .note {
@@ -139,10 +157,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 0 10px rgba(255,255,255,.8);
   img {
-    height: 15px;
-    width: 15px;
-    filter: brightness(0) invert(1);
+    height: 12px;
+    width: 12px;
+    // filter: brightness(0) invert(1);
   }
 }
 
@@ -152,11 +172,17 @@
   right: 0;
   max-width: 160px;
   @include tablet() {
-    bottom: -10px;
+    bottom: -45px;
   }
 
 }
 
 .cover {
   // position: absolute;
+}
+.avatar {
+  text-align: center;
+  @include tablet() {
+    display: none;
+  }
 }
