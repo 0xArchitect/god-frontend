@@ -14,6 +14,33 @@ function createWavFile(binaryData) {
   return URL.createObjectURL(blob);
 }
 
+const updateStorage = (chatList, chat, d) => {
+  const storedData = localStorage.getItem('chat-context');
+  if (storedData) {
+    try {
+      const parsedData = JSON.parse(storedData);
+      if (parsedData.length) {
+        const data = parsedData;
+        if (chatList?.length) data.push(...chatList);
+
+        chatList = data;
+      }
+    }
+    catch (e) { }
+  }
+
+  localStorage.setItem('chat-context', JSON.stringify([...chatList, {
+    chat: chat,
+    chatId: d?.chatId || null,
+    result: d?.result || null,
+    voice: d?.voice ? createWavFile(d?.voice) : null
+  }]));
+
+  if (d?.chatId) {
+    localStorage.setItem('chat-id', d?.chatId);
+  }
+}
+
 export default function ChatProvider({ children }) {
   const [chatList, setChatList] = useState([{
     chat: ''
@@ -21,8 +48,27 @@ export default function ChatProvider({ children }) {
   const [nextChatId, setNextChatId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const triggerChat = useCallback(({ chat }) => {
+  const updateChat = ({
+    chat,
+    chatId = null,
+    result = null,
+    voice = null
+  }) => {
+    setChatList((prev) => {
+      return [...prev, {
+        chat,
+        chatId,
+        result,
+        voice: voice ? createWavFile(voice) : null
+      }]
+    })
+  }
+
+  const triggerChat = useCallback(({ chat, chatId }) => {
     if (isLoading) return;
+
+    updateChat({ chat })
+    updateStorage(chatList, chat, {})
 
     setIsLoading(true)
     fetch(`${ENDPOINT}/rest/chat`, {
@@ -31,29 +77,17 @@ export default function ChatProvider({ children }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        chat, ...nextChatId && {
-          chatId: nextChatId
+        chat, ...(nextChatId || chatId) && {
+          chatId: chatId || nextChatId
         }
       })
     })
       .then((d) => d.json()).then((d) => {
         setIsLoading(false)
         setNextChatId(d.chatId);
-        localStorage.setItem('chat-context', JSON.stringify([...chatList, {
-          chat: chat,
-          chatId: d.chatId,
-          result: d.result,
-          voice: createWavFile(d.voice)
-        }]));
 
-        setChatList((prev) => {
-          return [...prev, {
-            chat: chat,
-            chatId: d.chatId,
-            result: d.result,
-            voice: createWavFile(d.voice)
-          }]
-        })
+        updateChat({ ...d })
+        updateStorage(chatList, chat, d)
       }).catch((e) => {
         setIsLoading(false)
       });
@@ -71,12 +105,6 @@ export default function ChatProvider({ children }) {
   }
 
   useEffect(() => {
-    triggerChat({
-      chat: ''
-    })
-  }, [])
-
-  useEffect(() => {
     const storedData = localStorage.getItem('chat-context');
 
     if (storedData) {
@@ -87,6 +115,15 @@ export default function ChatProvider({ children }) {
       catch (e) { }
     }
 
+    const storedChatId = localStorage.getItem('chat-id') || null;
+    if (storedChatId) {
+      setNextChatId(storedChatId);
+    }
+
+    triggerChat({
+      chat: '',
+      chatId: storedChatId
+    })
   }, []);
 
   return <Provider value={contextValue}>{children}</Provider>;
