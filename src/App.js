@@ -1,10 +1,10 @@
 import React from "react";
-import Button from './components/atoms/Button';
+import HomePage from "./components/HomePage/HomePage";
 
 function App() {
   return (
     <div className="container">
-      <Button>Click Me</Button>
+      <HomePage />
     </div>
   );
 }

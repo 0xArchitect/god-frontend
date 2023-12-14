@@ -18,7 +18,7 @@ $desktop-design-width: map-get(
 
 $screens: (
   "lg": 1200,
-  "sm": 360,
+  "sm": 768,
 );
 $mobile-width: map-get(
   $map: $screens,
@@ -45,7 +45,7 @@ $desktop-width: map-get(
 }
 
 @mixin mobile {
-  @media (max-width: #{$desktop-width}px) {
+  @media (max-width: #{$mobile-width}px) {
     @content;
   }
 }

@@ -1,0 +1,31 @@
+$fontPath: '../fonts';
+
+@mixin font-data {
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gambarino-Regular';
+    src: url('#{$fontPath}/Gambarino-Regular.woff2') format('woff2'),
+         url('#{$fontPath}/Gambarino-Regular.woff') format('woff'),
+         url('#{$fontPath}/Gambarino-Regular.ttf') format('truetype');
+    font-weight: 400;
+    @include font-data;
+         
+}
+
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('#{$fontPath}/Segoe UI.woff') format('woff');
+    font-weight: 300;
+    @include font-data;
+}
+    
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('#{$fontPath}/Segoe UI Bold.woff') format('woff');
+    font-weight: 500;
+    @include font-data;
+}
+    

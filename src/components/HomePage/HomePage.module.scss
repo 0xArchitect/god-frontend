@@ -1,0 +1,66 @@
+@import "../../scss/index.scss";
+
+.home {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+}
+.heading {
+    font-size: 40px;
+    line-height: 1.5;
+    font-family: 'Gambarino-Regular';
+    margin-bottom: 24px;
+    text-shadow: 0 4px 4px rgba(0,0,0,.25);
+    @include mobile() {
+        font-size: 30px;
+    }
+}
+.btn {
+    background-color: #D9D9D9;
+    font-family: 'Gambarino-Regular';
+    font-size: 20px;
+    line-height: 1.5;
+    color: #000;
+    border-radius: 10px;
+    padding: 12px 24px;
+    border: 1px solid $black;
+    &:hover {
+        background-color: #393939;
+        color: $white;
+    }
+    
+}
+.contentContainer {
+    text-align: center;
+    width: 100%;
+}
+
+.bg-image {
+	background-image: url(./../../assets/images/bg-image.svg);
+	background-size: cover;
+	background-position: 50% 40%;
+	background-repeat: no-repeat;
+	background-color: rgb(43, 103, 175);
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+	animation: bg-pulse 25s ease-in-out infinite;
+	filter: brightness(1.5) blur(18px);
+	filter: brightness(1) blur(0px);
+	filter: none;
+	transform: scale(1.0);
+}
+@keyframes bg-pulse {
+    0% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
