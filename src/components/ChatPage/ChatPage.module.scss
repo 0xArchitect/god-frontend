@@ -2,6 +2,7 @@
 
 .chat {
   padding: 26px 90px;
+  font-family: Segoe UI, sans-serif;
   @include tablet() {
     padding: 20px;
   }
@@ -38,38 +39,88 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  justify-content: flex-end;
 }
 
 .chatBox {
+    margin-bottom: 24px;
+    div {
+        font-size: 16px;
+        line-height: 22px;
+        padding: 12px 24px;
+        color: $white;
+        background-color: rgba(53, 146, 255, 0.6);
+        float: left;
+        max-width: calc(100% - 30px);
+        margin-top: 24px;
+        border-radius: 8px;
+        position: relative;
+        @include mobile() {
+          font-size: 14px;
+          line-height: 20px;
+          padding: 12px 24px;
+        }
+    }
+    .bg-white {
+        background-color: $white;
+        color: #0F0F0F;
+        float: right;
+        
+    }
 }
 
 .chatInputBox {
-  width: 100%;
   display: flex;
-  padding: toVw(12) toVw(24);
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(6.800000190734863px);
-  outline: none;
-  border: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.chatInput {
+    font-size: 16px;
+    line-height: 22px;
+    padding: 12px 24px;
+    width: calc(100% - 84px);
+    outline: none;
+    border: none;
+    border-radius: 8px;
 }
 
 .note {
   padding: toVwDesktop(20) toVwDesktop(30);
   background: rgba(255, 255, 255, 0.8);
   font-size: 12px;
-  font-family: Segoe UI, sans-serif;
+  max-width: 500px;
+  margin: 0 auto 24px;
 }
 
 @include desktop() {
   .chatBoxContainer {
     //   min-height: 90vh;
-    max-width: toVwDesktop(500);
+    max-width: 500px;
   }
+}
 
-  .chatInputBox {
-    padding: toVwDesktop(20) toVwDesktop(30);
+.send-button {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.play-btn {
+  position: absolute;
+    background-color: rgba(53, 146, 255, 0.6);
+    right: -30px;
+    bottom: 0;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  img {
+    height: 15px;
+    width: 15px;
+    filter: brightness(0) invert(1);
   }
 }
