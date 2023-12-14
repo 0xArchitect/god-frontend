@@ -20,15 +20,17 @@ const ChatListItem = ({
     return (
         <>
         {/* // <div className={styles.chatBox}> */}
-
-            <div className={`${styles.chat} ${styles['bg-white']}`}>
-                {chat}
-                
-            </div>
-            <div className={styles.result}>
-                {result}
-                <span className={styles['play-btn']}  onClick={playAudio}><img src={isOn ? pause : play} alt={isOn ? 'pause' : 'play'} /></span>
-            </div>
+            {chat &&
+                <div className={`${styles.chat} ${styles['bg-white']}`}>
+                    {chat}
+                </div>
+            }
+            {result &&
+                <div className={styles.result}>
+                    {result}
+                    <span className={styles['play-btn']}  onClick={playAudio}><img src={isOn ? pause : play} alt={isOn ? 'pause' : 'play'} /></span>
+                </div>
+            }
 
             
             {/* {
