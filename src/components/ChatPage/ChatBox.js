@@ -12,18 +12,21 @@ const ChatBox = () => {
             <div className={styles.note}>
                 Note: This is a simulated chat with Jesus using AI.
             </div>
-            <div className={styles.chatBoxContainer}>
-                <div className={styles.chatBox}>
-                    {
-                        chatList.map((e, i) =>
-                            <ChatListItem {...e} key={i} />
-                        )
-                    }
+            <div className={styles.box}>
+                <div className={styles.chatBoxContainer}>
+                    <div className={styles.chatBox}>
+                        {
+                            chatList.map((e, i) =>
+                                <ChatListItem {...e} key={i} />
+                            )
+                        }
+                    </div>
+                    
                 </div>
                 <div className={styles.chatInputBox}>
-                    <input type='text'  className={styles.chatInput}  onChange={(e) => setInput(e.target.value)} />
-                    <button className={styles['send-button']} onClick={() => handleChatInput(input)} ><img src={sendImg} alt="Send" /></button>
-                </div>
+                        <input type='text'  className={styles.chatInput}  onChange={(e) => setInput(e.target.value)} />
+                        <button className={styles['send-button']} onClick={() => handleChatInput(input)} ><img src={sendImg} alt="Send" /></button>
+                    </div>
             </div>
         </>
     );

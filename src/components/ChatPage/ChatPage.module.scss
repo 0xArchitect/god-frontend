@@ -35,8 +35,16 @@
 
 .chatBoxContainer {
   min-height: 70vh;
+  max-height: 70vh;
   margin: 0 auto;
-  display: flex;
+  overflow-y: scroll;
+  // display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.box {
+  // display: flex;
   justify-content: space-between;
   flex-direction: column;
   max-width: 500px;
@@ -48,6 +56,7 @@
     margin-bottom: 24px;
     display: flex;
     flex-direction: column;
+    width: 100%;
     div {
         font-size: 16px;
         line-height: 22px;
@@ -131,7 +140,7 @@
 
 .stem-logo {
   position: absolute;
-  bottom: 32px;
+  bottom: -32px;
   right: 0;
   max-width: 160px;
 }
