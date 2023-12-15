@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './ChatPage.module.scss';
 import ChatProvider, { useChatContext } from './ChatProvider';
 import ChatListItem from './ChatListItem';
@@ -9,14 +9,15 @@ import stemLogo from './../../assets/images/stem.png'
 const ChatBox = () => {
     const { handleChatInput, chatList } = useChatContext();
     const [input, setInput] = React.useState('');
+    const ref = useRef(null)
     return (
         <>
             <div className={styles.box}>
-                <div  className={styles.avatar}>
+                <div className={styles.avatar}>
                     <img src={avatar} alt="avatar" className='' />
                 </div>
                 <div className={styles.note}>
-                    Note: This is a simulated chat with Jesus using AI.
+                    Note: This is a simulated chat with $Lord using AI.
                 </div>
                 <div className={styles.chatBoxContainer}>
                     <div className={styles.chatBox}>
@@ -28,14 +29,19 @@ const ChatBox = () => {
                     </div>
                 </div>
             </div>
-                <form className={styles.chatInputBox}  onSubmit={(e) => {
+            <form
+                className={styles.chatInputBox}
+                ref={ref}
+                onSubmit={(e) => {
                     e.preventDefault();
                     handleChatInput(input);
-                }}>
-                        <input type='text'  className={styles.chatInput}  onChange={(e) => setInput(e.target.value)} />
-                        <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
-                        <img src={stemLogo} alt="Powered by STEM"  className={styles['stem-logo']} />
-                </form>
+                    if (ref?.current) ref.current.reset();
+                }}
+            >
+                <input placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)} />
+                <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
+                <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
+            </form>
             {/* </div> */}
         </>
     );

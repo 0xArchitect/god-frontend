@@ -1,0 +1,56 @@
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import bgMusic from './assets/music.mp3'
+
+const PageContext = createContext({});
+const { Provider } = PageContext;
+
+
+export const usePageContext = () => {
+  return useContext(PageContext);
+}
+
+export default function PageProvider({ children }) {
+  const ref = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const startMusic = useCallback((chat) => {
+    localStorage.removeItem('chat-context');
+    localStorage.removeItem('chat-id');
+
+    if (ref.current && !isPlaying) {
+      ref.current.play();
+    }
+    else if (ref.current && isPlaying) {
+      ref.current.stop();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.addEventListener('play', () => {
+        setIsPlaying(true);
+      });
+      ref.current.addEventListener('pause', () => {
+        setIsPlaying(false);
+      });
+    }
+  }, [])
+
+  const docClick = useCallback(() => {
+    if (!isPlaying) startMusic();
+  }, [isPlaying])
+
+  useEffect(() => {
+    document.body.addEventListener('click', docClick);
+  }, [])
+
+  const contextValue = {
+    startMusic,
+  }
+
+  return <Provider value={contextValue}>
+    <audio style={{ height: 0, width: 0, visibility: 'hidden' }} ref={ref} autoPlay src={bgMusic} controls></audio>
+    {children}
+  </Provider>;
+}
+
