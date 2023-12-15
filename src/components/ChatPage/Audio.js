@@ -1,35 +1,51 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const AudioPlayer = ({ audioBuffer }) => {
-    console.log('audioBuffer', audioBuffer);
-    const audioRef = useRef(null);
+const AudioPlayer = ({ buffer }) => {
+    console.log('buffer', buffer);
+    const [audioContext, setAudioContext] = useState(null);
+    const [sourceNode, setSourceNode] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
-        if (!audioBuffer) return;
+        const initializeAudio = async () => {
+            try {
+                const context = new (window.AudioContext || window.webkitAudioContext)();
+                const bufferSource = context.createBufferSource();
+                const audioBuffer = await context.decodeAudioData(buffer);
 
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const source = audioContext.createBufferSource();
+                bufferSource.buffer = audioBuffer;
+                bufferSource.connect(context.destination);
 
-        // Assuming audioBuffer is a Float32Array representing the audio data
-        const buffer = audioContext.createBuffer(1, audioBuffer.length, audioContext.sampleRate);
-        buffer.getChannelData(0).set(audioBuffer);
-
-        source.buffer = buffer;
-        source.connect(audioContext.destination);
-
-        // Play the audio
-        source.start();
-
-        // Cleanup when the component unmounts
-        return () => {
-            // source.stop();
-            // audioContext.close();
+                setAudioContext(context);
+                setSourceNode(bufferSource);
+            } catch (error) {
+                console.error('Error initializing audio context:', error);
+            }
         };
-    }, [audioBuffer]);
+
+        initializeAudio();
+
+        return () => {
+            if (sourceNode) {
+                sourceNode.stop();
+            }
+        };
+    }, [buffer]);
+
+    const togglePlayback = () => {
+        if (audioContext && sourceNode) {
+            if (isPlaying) {
+                sourceNode.stop();
+            } else {
+                sourceNode.start();
+            }
+            setIsPlaying(!isPlaying);
+        }
+    };
 
     return (
         <div>
-            <audio ref={audioRef} controls />
+            <button onClick={togglePlayback}>{isPlaying ? 'Pause' : 'Play'}</button>
         </div>
     );
 };
