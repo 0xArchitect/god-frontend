@@ -13,20 +13,20 @@ export default function PageProvider({ children }) {
   const ref = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const startMusic = useCallback((chat) => {
+  const startMusic = useCallback(() => {
     if (ref.current && !isPlaying) {
-      ref.current.play();
+      ref?.current?.play();
     }
     else if (ref.current && isPlaying) {
-      ref.current.stop();
+      ref?.current?.stop();
     }
   }, [isPlaying]);
 
-  const startMusicOnBtnClik = useCallback((chat) => {
+  const startMusicOnBtnClik = useCallback(() => {
     localStorage.removeItem('chat-context');
     localStorage.removeItem('chat-id');
 
-    startMusic()
+    if (!isPlaying && ref?.current) ref?.current?.play();
   }, [isPlaying]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function PageProvider({ children }) {
   }
 
   return <Provider value={contextValue}>
-    {/* <audio loop style={{ height: 0, width: 0, visibility: 'hidden' }} ref={ref} autoPlay src={bgMusic} controls></audio> */}
+    <audio loop style={{ height: 0, width: 0, visibility: 'hidden' }} ref={ref} autoPlay src={bgMusic} controls></audio>
     {children}
   </Provider>;
 }

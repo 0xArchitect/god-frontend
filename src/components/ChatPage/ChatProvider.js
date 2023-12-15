@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 
 const ChatContext = createContext({});
 const { Provider } = ChatContext;
@@ -43,6 +44,7 @@ const updateStorage = (chatList, chat, d) => {
 }
 
 export default function ChatProvider({ children }) {
+  const location = useLocation();
   const [buffer, setBuffer] = useState(null);
   const [audioContext, setAudioContext] = useState(null);
   const [audioBuffer, setAudioBuffer] = useState(null);
@@ -51,6 +53,15 @@ export default function ChatProvider({ children }) {
   const [startOffset, setStartOffset] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      if (audioSource) {
+        audioSource.stop();
+        setIsPlaying(false);
+      }
+    }
+  }, [location, audioSource]);
 
   const setBufferContext = useCallback((buffer) => {
     audioSource?.stop();
@@ -148,7 +159,7 @@ export default function ChatProvider({ children }) {
       .then((d) => d.json()).then((d) => {
         setIsLoading(false)
 
-        if(d?.detail) {
+        if (d?.detail) {
           updateChat({
             trouble: true,
             result: 'God is having some troubles now'
