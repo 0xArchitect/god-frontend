@@ -126,7 +126,12 @@ export default function ChatProvider({ children }) {
     voice = null
   }) => {
     setChatList((prev) => {
-      return [...prev, {
+      const list = [...prev].filter((x) => {
+        if (typeof x.chat == 'string' && x.chat.length == 0) return false;
+        return true;
+      });
+
+      return [...list, {
         chat,
         chatId,
         result,
