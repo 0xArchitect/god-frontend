@@ -31,8 +31,9 @@ const ChatBox = () => {
                 <form className={styles.chatInputBox}  onSubmit={(e) => {
                     e.preventDefault();
                     handleChatInput(input);
+                    setInput("");
                 }}>
-                        <input type='text'  className={styles.chatInput}  onChange={(e) => setInput(e.target.value)} />
+                        <input type='text'  className={styles.chatInput} value={input} onChange={(e) => setInput(e.target.value)} />
                         <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
                         <img src={stemLogo} alt="Powered by STEM"  className={styles['stem-logo']} />
                 </form>
