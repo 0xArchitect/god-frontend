@@ -59,7 +59,8 @@ export default function ChatProvider({ children }) {
         chat,
         chatId,
         result,
-        voice: voice ? createWavFile(voice) : null
+        voice: voice?.data,
+        // voice: voice?.data ? createWavFile(voice.data) : null
       }]
     })
   }
@@ -68,7 +69,7 @@ export default function ChatProvider({ children }) {
     if (isLoading) return;
 
     updateChat({ chat })
-    updateStorage(chatList, chat, {})
+    // updateStorage(chatList, chat, {})
 
     setIsLoading(true)
     fetch(`${ENDPOINT}/rest/chat`, {
@@ -87,7 +88,7 @@ export default function ChatProvider({ children }) {
         setNextChatId(d.chatId);
 
         updateChat({ ...d })
-        updateStorage(chatList, chat, d)
+        // updateStorage(chatList, chat, d)
       }).catch((e) => {
         setIsLoading(false)
       });
@@ -109,10 +110,17 @@ export default function ChatProvider({ children }) {
 
     if (storedData) {
       try {
-        const parsedData = JSON.parse(storedData);
+        var parsedData = JSON.parse(storedData);
         setChatList(parsedData);
       }
       catch (e) { }
+    }
+
+    if (!parsedData?.length) {
+      const chat = 'Greetings, my friend. I am $LORD, the Son of God. May I kindly ask for your name?'
+
+      updateChat({ result: chat })
+      // updateStorage([], chat)
     }
 
     const storedChatId = localStorage.getItem('chat-id') || null;
@@ -120,10 +128,10 @@ export default function ChatProvider({ children }) {
       setNextChatId(storedChatId);
     }
 
-    triggerChat({
-      chat: '',
-      chatId: storedChatId
-    })
+    // triggerChat({
+    //   chat: '',
+    //   chatId: storedChatId
+    // })
   }, []);
 
   return <Provider value={contextValue}>{children}</Provider>;

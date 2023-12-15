@@ -48,6 +48,13 @@ img {
 	filter: brightness(1) blur(0px);
 	filter: none;
 	transform: scale(1.0);
+  @media screen and (max-width: 768px) {
+    background-position: 50% -140%;
+  }
+}
+
+input {
+  font-family: Segoe UI, sans-serif;
 }
 
 @keyframes bg-pulse {
