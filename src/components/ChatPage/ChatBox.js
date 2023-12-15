@@ -40,7 +40,7 @@ const ChatBox = () => {
                             <img src={cross} alt="Powered by STEM" />
                             <img src={cross} alt="Powered by STEM" />
                         </span>} */}
-                        <Loader />
+                        {isLoading && <Loader />}
                     </div>
 
                 </div>
