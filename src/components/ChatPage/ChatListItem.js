@@ -1,0 +1,48 @@
+import React, {useState} from 'react';
+import styles from './ChatPage.module.scss';
+import play from './../../assets/images/play_icon.svg';
+import pause from './../../assets/images/pause_icon.svg'
+
+const ChatListItem = ({
+    chat,
+    chatId,
+    result,
+    voice
+}) => {
+
+    const[isOn, setIsOn] = useState(false);
+    const playAudio = () => {
+        setIsOn(!isOn)
+    }
+    return (
+        <>
+        {/* // <div className={styles.chatBox}> */}
+            {chat &&
+                <div className={`${styles.chat} ${styles['bg-white']}`}>
+                    {chat}
+                </div>
+            }
+            {result &&
+                <div className={styles.result}>
+                    {result}
+                    <span className={styles['play-btn']}  onClick={playAudio}><img src={isOn ? pause : play} alt={isOn ? 'pause' : 'play'} /></span>
+                </div>
+            }
+
+            
+            {/* {
+                voice && <div className={styles.voice} onClick={() => {
+                    playBinaryToAudio(voice)
+                }}>
+                    Play
+                    <AudioPlayer binaryData={voice} />
+                    <audio controls src={voice} />
+                </div>
+            } */}
+         {/* </div> */}
+        </>
+    );
+}
+
+
+export default ChatListItem;

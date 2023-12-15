@@ -1,37 +1,47 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './ChatPage.module.scss';
+import ChatProvider, { useChatContext } from './ChatProvider';
+import ChatListItem from './ChatListItem';
 import sendImg from './../../assets/images/send.svg';
-import play from './../../assets/images/play_icon.svg';
-import pause from './../../assets/images/pause_icon.svg'
-
+import avatar from './../../assets/images/avatar.svg';
+import stemLogo from './../../assets/images/stem.png'
 
 const ChatBox = () => {
-    const[isOn, setIsOn] = useState(false);
-    const playAudio = () => {
-        setIsOn(!isOn)
-    }
+    const { handleChatInput, chatList } = useChatContext();
+    const [input, setInput] = React.useState('');
     return (
         <>
-            <div className={styles.note}>
-                Note: This is a simulated chat with Jesus using AI.
-            </div>
-            <div className={styles.chatBoxContainer}>
-                <div className={styles.chatBox}>
-                    <div className='bg-blue'>
-                        Greetings, my friend. I am Jesus, the Son of God. May I kindly ask for your name?
-                        <span className={styles['play-btn']}  onClick={playAudio}><img src={isOn ? pause : play} alt={isOn ? 'pause' : 'play'} /></span>
-                    </div>
-                    <div className={styles['bg-white']}>
-                        Can you share a parable or story that holds a special meaning to you?
+            <div className={styles.box}>
+                <div  className={styles.avatar}>
+                    <img src={avatar} alt="avatar" className='' />
+                </div>
+                <div className={styles.note}>
+                    Note: This is a simulated chat with Jesus using AI.
+                </div>
+                <div className={styles.chatBoxContainer}>
+                    <div className={styles.chatBox}>
+                        {
+                            chatList.map((e, i) =>
+                                <ChatListItem {...e} key={i} />
+                            )
+                        }
                     </div>
                 </div>
+            </div>
                 <div className={styles.chatInputBox}>
-                    <input type='text'  className={styles.chatInput}  />
-                    <button className={styles['send-button']}><img src={sendImg} alt="Send" /></button>
+                        <input type='text'  className={styles.chatInput}  onChange={(e) => setInput(e.target.value)} />
+                        <button className={styles['send-button']} onClick={() => handleChatInput(input)} ><img src={sendImg} alt="Send" /></button>
+                        <img src={stemLogo} alt="Powered by STEM"  className={styles['stem-logo']} />
                 </div>
-            </div>
+            {/* </div> */}
         </>
     );
 }
 
-export default ChatBox;
+export const ChatBoxContainer = () => {
+    return <ChatProvider>
+        <ChatBox />
+    </ChatProvider>
+}
+
+export default ChatBoxContainer;
