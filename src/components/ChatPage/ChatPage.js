@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './ChatPage.module.scss';
 
 import logo from './../../assets/images/dummy-logo.png'
-import avatar from './../../assets/images/avatar.svg'
 
 import twitter from './../../assets/images/twitter.svg'
 import telegram from './../../assets/images/telegram.svg'
@@ -11,9 +10,49 @@ import vector from './../../assets/images/vector.svg'
 
 import { Link } from "react-router-dom";
 import ChatBox from './ChatBox';
-import stemLogo from './../../assets/images/stem.png'
 
 const ChatPage = () => {
+
+    const checkHeightAndScroll = () => {
+        if (document.documentElement.scrollHeight > window.innerHeight) {
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    useEffect(() => {
+        // Check initially on load
+        checkHeightAndScroll();
+
+        // Set up an event listener for window resize
+        const handleResize = () => {
+            checkHeightAndScroll();
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Set up a MutationObserver to observe DOM changes
+        const observer = new MutationObserver(mutations => {
+            checkHeightAndScroll();
+        });
+
+        observer.observe(document.body, {
+            childList: true, // observe direct children
+            subtree: true, // and lower descendants too
+            attributes: false,
+            characterData: false
+        });
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            observer.disconnect();
+        };
+    }, []);
+
+    
     return (
         <div className={styles.chat}>
             <div className='bg-image'></div>
@@ -21,9 +60,9 @@ const ChatPage = () => {
                 <div>
                     <Link to="/"><img src={logo} alt="Logo" /></Link>
                 </div>
-                <div>
+                {/* <div>
                     <img src={avatar} alt="avatar" className='' />
-                </div>
+                </div> */}
                 <div>
                     <div className={styles.social}>
                         <Link to="https://twitter.com/" target='_blank' > <img src={twitter} alt="Twitter" /> </Link>
@@ -33,9 +72,9 @@ const ChatPage = () => {
                 </div>
             </div>
             <ChatBox />
-            <div className='container relative'>
-            <img src={stemLogo} alt="Powered by STEM"  className={styles['stem-logo']} />
-            </div>
+            {/* <div className='container relative'>
+            
+            </div> */}
         </div>
     );
 }
