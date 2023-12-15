@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 const ChatContext = createContext({});
 const { Provider } = ChatContext;
 
-const ENDPOINT = 'https://83f8-2405-201-1f-1161-9c9b-2da4-cf3b-73af.ngrok-free.app';
+const ENDPOINT = 'https://02f5-2405-201-1f-1161-9c9b-2da4-cf3b-73af.ngrok-free.app';
 
 export const useChatContext = () => {
   return useContext(ChatContext);
