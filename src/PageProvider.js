@@ -14,15 +14,19 @@ export default function PageProvider({ children }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const startMusic = useCallback((chat) => {
-    localStorage.removeItem('chat-context');
-    localStorage.removeItem('chat-id');
-
     if (ref.current && !isPlaying) {
       ref.current.play();
     }
     else if (ref.current && isPlaying) {
       ref.current.stop();
     }
+  }, [isPlaying]);
+
+  const startMusicOnBtnClik = useCallback((chat) => {
+    localStorage.removeItem('chat-context');
+    localStorage.removeItem('chat-id');
+
+    startMusic()
   }, [isPlaying]);
 
   useEffect(() => {
@@ -46,6 +50,7 @@ export default function PageProvider({ children }) {
 
   const contextValue = {
     startMusic,
+    startMusicOnBtnClik
   }
 
   return <Provider value={contextValue}>

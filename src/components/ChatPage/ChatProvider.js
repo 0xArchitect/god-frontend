@@ -21,7 +21,7 @@ const updateStorage = (chatList, chat, d) => {
       const parsedData = JSON.parse(storedData);
       if (parsedData.length) {
         const data = parsedData;
-        if (chatList?.length) data.push(...chatList);
+        // if (chatList?.length) data.push(...chatList);
 
         chatList = data;
       }
@@ -33,7 +33,8 @@ const updateStorage = (chatList, chat, d) => {
     chat: chat,
     chatId: d?.chatId || null,
     result: d?.result || null,
-    voice: d?.voice ? createWavFile(d?.voice) : null
+    voice: d?.voice?.data || null,
+    // voice: d?.voice ? createWavFile(d?.voice) : null
   }]));
 
   if (d?.chatId) {
@@ -129,17 +130,18 @@ export default function ChatProvider({ children }) {
     if (isLoading) return;
 
     updateChat({ chat })
-    // updateStorage(chatList, chat, {})
+    updateStorage(chatList, chat, {})
 
     setIsLoading(true)
+    const storedChatId = localStorage.getItem('chat-id') || null;
     fetch(`${ENDPOINT}/rest/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        chat, ...(nextChatId || chatId) && {
-          chatId: chatId || nextChatId
+        chat, ...(storedChatId || chatId) && {
+          chatId: chatId || storedChatId
         }
       })
     })
@@ -163,7 +165,7 @@ export default function ChatProvider({ children }) {
           setBufferContext(d.voice.data);
           setCurrentIndex(nextIndex);
         }
-        // updateStorage(chatList, chat, d)
+        updateStorage(chatList, null, d)
       }).catch((e) => {
         console.log('d', e);
         setIsLoading(false)
