@@ -21,12 +21,15 @@
   z-index: 9999;
   
     @include tablet() {
-      justify-content: flex-end;
+      // justify-content: flex-end;
       // z-index: 999;
       // background: #fff;
       // box-shadow: 0 0 10px #fff;
       padding: 20px 0;
       top: 0;
+      justify-content: center;
+      align-items: flex-end;
+      height: 185px;
     }
   
 }
@@ -43,7 +46,7 @@
   padding: 6px 4px;
   border-radius: 6px;
   @include tablet() {
-    flex-direction: column;
+    // flex-direction: column;
   }
   img {
     cursor: pointer;
@@ -150,6 +153,9 @@
   font-size: 12px;
   max-width: 500px;
   margin: 0 auto 24px;
+  @include tablet() {
+    margin: 50px auto 24px;
+  }
 }
 
 @include desktop() {
