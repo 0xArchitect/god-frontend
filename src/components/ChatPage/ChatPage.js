@@ -57,7 +57,7 @@ const ChatPage = () => {
         <div className={styles.chat}>
             <div className='bg-image'></div>
             <div className={styles.header}>
-                <div>
+                <div className={styles.logo} >
                     <Link to="/"><img src={logo} alt="Logo" /></Link>
                 </div>
                 {/* <div>
@@ -65,9 +65,9 @@ const ChatPage = () => {
                 </div> */}
                 <div>
                     <div className={styles.social}>
-                        <Link to="https://twitter.com/" target='_blank' > <img src={twitter} alt="Twitter" /> </Link>
-                        <Link to="https://web.telegram.org/" > <img src={telegram} alt="Telegram" /> </Link>
-                        <Link to="https://google.com" > <img src={vector} alt="logo a" /> </Link>
+                        <Link className='social-link' to="https://twitter.com/" target='_blank' title='Twitter' > <img src={twitter} alt="Twitter" /> </Link>
+                        <Link className='social-link' to="https://web.telegram.org/" target='_blank' title='Telegram' > <img src={telegram} alt="Telegram" /> </Link>
+                        <Link className='social-link' to="https://google.com" target='_blank' title='ChatGPT'> <img src={vector} alt="logo a" /> </Link>
                     </div>
                 </div>
             </div>
