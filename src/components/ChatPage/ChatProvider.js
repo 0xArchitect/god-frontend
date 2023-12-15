@@ -130,7 +130,7 @@ export default function ChatProvider({ children }) {
 
   const handleChatInput = useCallback((chat) => {
     if (isLoading) return;
-    triggerChat({ chat })
+    if (chat?.length) triggerChat({ chat })
   }, [isLoading])
 
   const contextValue = {

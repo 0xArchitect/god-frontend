@@ -49,7 +49,7 @@ export default function PageProvider({ children }) {
   }
 
   return <Provider value={contextValue}>
-    <audio loop style={{ height: 0, width: 0, visibility: 'hidden' }} ref={ref} autoPlay src={bgMusic} controls></audio>
+    {/* <audio loop style={{ height: 0, width: 0, visibility: 'hidden' }} ref={ref} autoPlay src={bgMusic} controls></audio> */}
     {children}
   </Provider>;
 }

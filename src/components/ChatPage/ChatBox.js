@@ -24,14 +24,15 @@ const ChatBox = () => {
                     <div className={styles.chatBox}>
                         {
                             chatList.map((e, i) =>
-                                <ChatListItem {...e} key={i} />
+                                <ChatListItem index={i} {...e} key={i} />
                             )
                         }
                         {isLoading && <span className={styles.loader}>
-                        <img src={cross} alt="Powered by STEM" />
-                    </span>}
+                            <img src={cross} alt="Powered by STEM" />
+                            <img src={cross} alt="Powered by STEM" />
+                        </span>}
                     </div>
-                    
+
                 </div>
             </div>
             <form
@@ -43,7 +44,17 @@ const ChatBox = () => {
                     if (ref?.current) ref.current.reset();
                 }}
             >
-                <textarea placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)} ></textarea>
+                <textarea id='ta' placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(event) => {
+                        if (event.key === 'Enter') {
+                            handleChatInput(input);
+                            if (ref?.current) ref.current.reset();
+                            console.log('dd',  document.querySelector('#ta'));
+                            document.querySelector('#ta').value = '';
+                        }
+                    }
+                    }
+                ></textarea>
                 <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
                 <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
             </form>
