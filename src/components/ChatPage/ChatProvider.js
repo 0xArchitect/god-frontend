@@ -58,7 +58,6 @@ export default function ChatProvider({ children }) {
     return () => {
       if (audioSource) {
         audioSource.stop();
-        setIsPlaying(false);
       }
     }
   }, [location, audioSource]);
