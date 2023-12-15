@@ -91,12 +91,42 @@ export default function ChatProvider({ children }) {
         // updateStorage(chatList, chat, d)
       }).catch((e) => {
         setIsLoading(false)
-        updateChat({ 
+        updateChat({
           trouble: true,
           result: 'God is having some troubles now'
-         })
+        })
       });
   }, [nextChatId, isLoading])
+
+  const triggerInitChat = useCallback(() => {
+    if (isLoading) return;
+
+    const chat = 'Greetings, my friend. I am $LORD, the Son of God. May I kindly ask for your name?'
+
+    setIsLoading(true)
+
+    fetch(`${ENDPOINT}/rest/chat/getAudio`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: chat,
+      })
+    })
+      .then((d) => d.json()).then((d) => {
+        console.log('d', d);
+        setIsLoading(false)
+        updateChat({ result: chat, voice: d?.voice })
+      }).catch((e) => {
+        setIsLoading(false)
+        updateChat({
+          trouble: true,
+          result: 'God is having some troubles now'
+        })
+      });
+  }, [nextChatId, isLoading])
+
 
   const handleChatInput = useCallback((chat) => {
     if (isLoading) return;
@@ -122,10 +152,7 @@ export default function ChatProvider({ children }) {
     }
 
     if (!parsedData?.length) {
-      const chat = 'Greetings, my friend. I am $LORD, the Son of God. May I kindly ask for your name?'
-
-      updateChat({ result: chat })
-      // updateStorage([], chat)
+      triggerInitChat()
     }
 
     const storedChatId = localStorage.getItem('chat-id') || null;

@@ -21,6 +21,10 @@ img {
   padding-right: toVw(12);
 }
 
+textarea {
+  resize: none;
+}
+
 @include desktop() {
   .container {
     max-width: toVwDesktop(1400);
@@ -53,8 +57,13 @@ img {
   }
 }
 
+textarea,
 input {
   font-family: Segoe UI, sans-serif;
+}
+
+textarea {
+  padding: 15px 24px!important;
 }
 
 @keyframes bg-pulse {

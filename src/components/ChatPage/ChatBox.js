@@ -43,7 +43,7 @@ const ChatBox = () => {
                     if (ref?.current) ref.current.reset();
                 }}
             >
-                <input placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)} />
+                <textarea placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)} ></textarea>
                 <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
                 <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
             </form>

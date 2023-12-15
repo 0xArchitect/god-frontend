@@ -39,8 +39,8 @@ const ChatListItem = ({
             src && src.start();
         }
 
-        setIsPlaying(!isPlaying);
-    }, [audioBuffer]);
+        setIsPlaying((p) => !p);
+    }, [audioBuffer, source, isPlaying]);
 
     const fun = (arrayBuffer) => {
         const context = new (window.AudioContext || window.webkitAudioContext)();
@@ -57,7 +57,7 @@ const ChatListItem = ({
 
             if (newSource) {
                 newSource.start();
-                setIsPlaying(true);
+                setIsPlaying(newSource.context.state === 'running');
             }
         });
 
