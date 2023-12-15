@@ -84,6 +84,9 @@
         border-radius: 8px;
         position: relative;
         align-self: start;
+        &:first-child {
+          margin-top: 0;
+        }
         @include mobile() {
           font-size: 14px;
           line-height: 20px;
