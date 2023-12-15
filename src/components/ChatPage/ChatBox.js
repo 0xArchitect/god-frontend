@@ -5,9 +5,10 @@ import ChatListItem from './ChatListItem';
 import sendImg from './../../assets/images/send.svg';
 import avatar from './../../assets/images/avatar.svg';
 import stemLogo from './../../assets/images/stem.png'
+import cross from './../../assets/images/cross.png';
 
 const ChatBox = () => {
-    const { handleChatInput, chatList } = useChatContext();
+    const { handleChatInput, chatList, isLoading } = useChatContext();
     const [input, setInput] = React.useState('');
     const ref = useRef(null)
     return (
@@ -26,7 +27,11 @@ const ChatBox = () => {
                                 <ChatListItem {...e} key={i} />
                             )
                         }
+                        {isLoading && <span className={styles.loader}>
+                        <img src={cross} alt="Powered by STEM" />
+                    </span>}
                     </div>
+                    
                 </div>
             </div>
             <form

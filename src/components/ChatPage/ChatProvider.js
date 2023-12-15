@@ -91,6 +91,10 @@ export default function ChatProvider({ children }) {
         // updateStorage(chatList, chat, d)
       }).catch((e) => {
         setIsLoading(false)
+        updateChat({ 
+          trouble: true,
+          result: 'God is having some troubles now'
+         })
       });
   }, [nextChatId, isLoading])
 
@@ -102,7 +106,8 @@ export default function ChatProvider({ children }) {
   const contextValue = {
     handleChatInput,
     chatList,
-    nextChatId
+    nextChatId,
+    isLoading
   }
 
   useEffect(() => {
