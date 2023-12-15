@@ -1,0 +1,23 @@
+.three-dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  max-width: 60px;
+  box-shadow: 0px 1px 32px 12px rgba(180, 224, 254, 0.6);
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.dot.active {
+  transform: translateY(-5px);
+}

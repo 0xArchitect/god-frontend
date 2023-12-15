@@ -6,6 +6,7 @@ import sendImg from './../../assets/images/send.svg';
 import avatar from './../../assets/images/avatar.svg';
 import stemLogo from './../../assets/images/stem.png'
 import cross from './../../assets/images/cross.png';
+import Loader from './Loader';
 
 const ChatBox = () => {
     const { handleChatInput, chatList, isLoading } = useChatContext();
@@ -13,7 +14,7 @@ const ChatBox = () => {
     const ref = useRef(null)
 
     useEffect(() => {
-        if(inputValue?.trim().length == 0) {
+        if (inputValue?.trim().length == 0) {
             var textarea = document.getElementById('ta');
             var cleanedContent = textarea.value.replace(/(\r\n|\n|\r)/gm, '');
             textarea.value = cleanedContent;
@@ -35,10 +36,11 @@ const ChatBox = () => {
                                 <ChatListItem index={i} {...e} key={i} />
                             )
                         }
-                        {isLoading && <span className={styles.loader}>
+                        {/* {isLoading && <span className={styles.loader}>
                             <img src={cross} alt="Powered by STEM" />
                             <img src={cross} alt="Powered by STEM" />
-                        </span>}
+                        </span>} */}
+                        <Loader />
                     </div>
 
                 </div>
