@@ -59,8 +59,13 @@ const AudioPlayer = ({ buffer }) => {
         }
     };
 
+    useEffect(() => {
+        toggleAudioPlayback();
+    }, [buffer])
+
     return (
-        <span className={styles['play-btn']} onClick={toggleAudioPlayback}><img src={isPlaying ? pause : play} alt={isPlaying ? 'pause' : 'play'} /></span>
+        null
+        // <span className={styles['play-btn']} onClick={toggleAudioPlayback}><img src={isPlaying ? pause : play} alt={isPlaying ? 'pause' : 'play'} /></span>
     );
 };
 

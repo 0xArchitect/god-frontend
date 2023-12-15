@@ -2,48 +2,53 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './ChatPage.module.scss';
 import play from './../../assets/images/play_icon.svg';
 import pause from './../../assets/images/pause_icon.svg'
-import AudioPlayer from './Audio';
-
-function createWavFile(binaryData) {
-    const blob = new Blob([binaryData], { type: 'audio/mpeg' });
-    return URL.createObjectURL(blob);
-}
-
+import { useChatContext } from './ChatProvider'
 
 const ChatListItem = ({
     chat,
     chatId,
     result,
-    voice
+    voice,
+    index,
 }) => {
-    const [audioContext, setAudioContext] = useState(null);
-    const [audioBuffer, setAudioBuffer] = useState(null);
-    const [source, setSource] = useState(null);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const {
+        setAudioBuffer,
+        isPlaying,
+        toggleAudioPlayback,
+        setBuffer,
+        setIsPlaying,
+        setCurrentIndex,
+        currentIndex,
+        setBufferContext
+    } = useChatContext();
+    // const [audioContext, setAudioContext] = useState(null);
+    // const [audioBuffer, setAudioBuffer] = useState(null);
+    // const [source, setSource] = useState(null);
+    // const [isPlaying, setIsPlaying] = useState(false);
 
-    const handlePlayPause = useCallback(() => {
-        console.log('src', isPlaying, source);
+    // const handlePlayPause = useCallback(() => {
+    //     console.log('src', isPlaying, source);
 
-        if (!audioContext || !audioBuffer) return;
+    //     if (!audioContext || !audioBuffer) return;
 
-        // if (!source) {
-        //     const newSource = audioContext.createBufferSource();
-        //     newSource.buffer = audioBuffer;
-        //     newSource.connect(audioContext.destination);
-        //     src = newSource;
-        //     setSource(newSource);
-        // }
+    //     // if (!source) {
+    //     //     const newSource = audioContext.createBufferSource();
+    //     //     newSource.buffer = audioBuffer;
+    //     //     newSource.connect(audioContext.destination);
+    //     //     src = newSource;
+    //     //     setSource(newSource);
+    //     // }
 
-        if (isPlaying) {
-            console.log('stop')
-            source.stop();
-        } else {
-            console.log('start')
-            source.start(0);
-        }
+    //     if (isPlaying) {
+    //         console.log('stop')
+    //         source.stop();
+    //     } else {
+    //         console.log('start')
+    //         source.start(0);
+    //     }
 
-        setIsPlaying((p) => !p);
-    }, [audioBuffer, source, isPlaying]);
+    //     setIsPlaying((p) => !p);
+    // }, [audioBuffer, source, isPlaying]);
 
     // const fun = (arrayBuffer) => {
     //     const context = new (window.AudioContext || window.webkitAudioContext)();
@@ -84,6 +89,8 @@ const ChatListItem = ({
     //     }
     // }, [source])
 
+    const isCurrentPlaying = currentIndex === index;
+
     return (
         <>
             {/* // <div className={styles.chatBox}> */}
@@ -95,19 +102,20 @@ const ChatListItem = ({
             {result &&
                 <div className={`${styles.result}`}>
                     {result}
-                    {/* {voice && <span className={styles['play-btn']} onClick={handlePlayPause}><img src={isPlaying ? pause : play} alt={isPlaying ? 'pause' : 'play'} /></span>} */}
-                    {
-                        voice && <AudioPlayer buffer={voice} />
-                    }
+                    {voice && <span className={styles['play-btn']} onClick={() => {
+                        if (isCurrentPlaying) {
+                            toggleAudioPlayback();
+                        }
+                        else {
+                            setBufferContext(voice);
+                            setCurrentIndex(index)
+                        }
+                    }}><img src={isCurrentPlaying && isPlaying ? pause : play} alt={isCurrentPlaying && isPlaying ? 'pause' : 'play'} /></span>}
+                    {/* {
+                        voice && <AudioPlayer buffer={voice} index={index} />
+                    } */}
                 </div>
             }
-
-            {/* {
-                voice && <div className={styles.voice}>
-                    Play
-                    <AudioPlayer audioBuffer={voice} />
-                </div>
-            } */}
             {/* </div> */}
         </>
     );

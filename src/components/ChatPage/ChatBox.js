@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './ChatPage.module.scss';
 import ChatProvider, { useChatContext } from './ChatProvider';
 import ChatListItem from './ChatListItem';
@@ -9,8 +9,16 @@ import cross from './../../assets/images/cross.png';
 
 const ChatBox = () => {
     const { handleChatInput, chatList, isLoading } = useChatContext();
-    const [input, setInput] = React.useState('');
+    const [inputValue, setInput] = React.useState('');
     const ref = useRef(null)
+
+    useEffect(() => {
+        if(inputValue?.trim().length == 0) {
+            var textarea = document.getElementById('ta');
+            var cleanedContent = textarea.value.replace(/(\r\n|\n|\r)/gm, '');
+            textarea.value = cleanedContent;
+        }
+    }, [inputValue])
     return (
         <>
             <div className={styles.box}>
@@ -40,17 +48,17 @@ const ChatBox = () => {
                 ref={ref}
                 onSubmit={(e) => {
                     e.preventDefault();
-                    handleChatInput(input);
+                    handleChatInput(inputValue);
                     if (ref?.current) ref.current.reset();
+                    setInput('')
                 }}
             >
                 <textarea id='ta' placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(event) => {
                         if (event.key === 'Enter') {
-                            handleChatInput(input);
+                            handleChatInput(inputValue);
                             if (ref?.current) ref.current.reset();
-                            console.log('dd',  document.querySelector('#ta'));
-                            document.querySelector('#ta').value = '';
+                            setInput('')
                         }
                     }
                     }

@@ -98,6 +98,7 @@
         border-radius: 8px;
         position: relative;
         align-self: start;
+        word-wrap: break-word;
         &:first-child {
           margin-top: 0;
         }

@@ -42,6 +42,66 @@ const updateStorage = (chatList, chat, d) => {
 }
 
 export default function ChatProvider({ children }) {
+  const [buffer, setBuffer] = useState(null);
+  const [audioContext, setAudioContext] = useState(null);
+  const [audioBuffer, setAudioBuffer] = useState(null);
+  const [audioSource, setAudioSource] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [startOffset, setStartOffset] = useState(0);
+  const [startTime, setStartTime] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(null);
+
+  const setBufferContext = useCallback((buffer) => {
+    audioSource?.stop();
+    setIsPlaying(false);
+    setStartOffset(0);
+    const context = new (window.AudioContext || window.webkitAudioContext)();
+    setAudioContext(context);
+
+    const uint8Array = new Uint8Array(buffer);
+    const arrayBuffer1 = uint8Array.buffer
+    context.decodeAudioData(arrayBuffer1, (decodedBuffer) => {
+      setAudioBuffer(decodedBuffer);
+    });
+
+  }, [audioSource])
+
+  const toggleAudioPlayback = () => {
+    if (!audioContext || !audioBuffer) return;
+
+    if (isPlaying) {
+      // Stop the audio
+      const elapsedTime = audioContext.currentTime - startTime;
+      setStartOffset(startOffset + elapsedTime);
+      audioSource.stop();
+      setIsPlaying(false);
+    } else {
+      // Play the audio
+      const source = audioContext.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioContext.destination);
+      source.start(0, startOffset % audioBuffer.duration);
+      source.startTime = audioContext.currentTime;
+
+      setStartTime(audioContext.currentTime);
+      setAudioSource(source);
+      setIsPlaying(source.context.state !== 'suspended')
+
+      // Handle when the audio ends
+      source.onended = () => {
+        if (isPlaying || audioContext.currentTime >= audioBuffer.duration) {
+          setIsPlaying(false);
+          setStartOffset(0);
+        }
+      };
+    }
+  };
+
+  useEffect(() => {
+    toggleAudioPlayback();
+  }, [audioBuffer])
+
+  // end audio
   const [chatList, setChatList] = useState([{
     chat: ''
   }]);
@@ -85,18 +145,34 @@ export default function ChatProvider({ children }) {
     })
       .then((d) => d.json()).then((d) => {
         setIsLoading(false)
+
+        if(d?.detail) {
+          updateChat({
+            trouble: true,
+            result: 'God is having some troubles now'
+          })
+
+          return;
+        }
+
         setNextChatId(d.chatId);
 
         updateChat({ ...d })
+        if (d?.voice?.data) {
+          const nextIndex = chatList.length + 1;
+          setBufferContext(d.voice.data);
+          setCurrentIndex(nextIndex);
+        }
         // updateStorage(chatList, chat, d)
       }).catch((e) => {
+        console.log('d', e);
         setIsLoading(false)
         updateChat({
           trouble: true,
           result: 'God is having some troubles now'
         })
       });
-  }, [nextChatId, isLoading])
+  }, [nextChatId, isLoading, chatList])
 
   const triggerInitChat = useCallback(() => {
     if (isLoading) return;
@@ -115,9 +191,13 @@ export default function ChatProvider({ children }) {
       })
     })
       .then((d) => d.json()).then((d) => {
-        console.log('d', d);
         setIsLoading(false)
         updateChat({ result: chat, voice: d?.voice })
+
+        if (d?.voice?.data) {
+          setBufferContext(d.voice.data);
+          setCurrentIndex(0);
+        }
       }).catch((e) => {
         setIsLoading(false)
         updateChat({
@@ -125,10 +205,11 @@ export default function ChatProvider({ children }) {
           result: 'God is having some troubles now'
         })
       });
-  }, [nextChatId, isLoading])
+  }, [nextChatId, isLoading, chatList])
 
 
   const handleChatInput = useCallback((chat) => {
+    console.log('isLoading', isLoading);
     if (isLoading) return;
     if (chat?.length) triggerChat({ chat })
   }, [isLoading])
@@ -137,7 +218,15 @@ export default function ChatProvider({ children }) {
     handleChatInput,
     chatList,
     nextChatId,
-    isLoading
+    isLoading,
+    setIsPlaying,
+    isPlaying,
+    setBuffer,
+    setAudioBuffer,
+    toggleAudioPlayback,
+    setCurrentIndex,
+    currentIndex,
+    setBufferContext
   }
 
   useEffect(() => {
@@ -166,6 +255,6 @@ export default function ChatProvider({ children }) {
     // })
   }, []);
 
-  return <Provider value={contextValue}>{children}</Provider>;
+  return <Provider value={contextValue}>{children} </Provider>;
 }
 
