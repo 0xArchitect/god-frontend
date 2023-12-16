@@ -274,7 +274,7 @@ export default function ChatProvider({ children }) {
 
   const docClick = useCallback(() => {
     const currentItem = chatList?.[0];
-    if (currentItem && !isPlaying) {
+    if (currentItem && !isPlaying && chatList.length == 1) {
       setBufferContext(currentItem?.voice)
       setCurrentIndex(0)
     }
