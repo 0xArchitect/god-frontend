@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 const ChatContext = createContext({});
 const { Provider } = ChatContext;
 
-const ENDPOINT = 'http://18.232.203.193';
+const ENDPOINT = 'https://jesusai-dyvdf.ondigitalocean.app';
 
 export const useChatContext = () => {
   return useContext(ChatContext);
