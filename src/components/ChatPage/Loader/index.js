@@ -15,11 +15,13 @@ const Loader = () => {
 
     return (
         <p className="three-dots-container">
-            <span className={`dot ${dotCount === 1 ? 'active' : ''}`}>
-                <img src={cross} alt="cross" />
-            </span>
-            <span className={`dot ${dotCount === 2 ? 'active' : ''}`}>
-                <img src={cross} alt="cross" />
+            <span className='animate'>
+                <span className={`dot`}>
+                    <img src={cross} alt="cross" />
+                </span>
+                <span className={`dot `}>
+                    <img src={cross} alt="cross" />
+                </span>
             </span>
         </p>
     );

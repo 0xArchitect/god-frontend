@@ -38,9 +38,9 @@ const ChatBox = () => {
                         <Link className='social-link' to="https://google.com" target='_blank' title='ChatGPT'> <img src={vector} alt="logo a" /> </Link>
                     </div>
                 </div>
-                <div className={styles.note}>
+                {/* <div className={styles.note}>
                     Note: This is a simulated chat with GOD using AI.
-                </div>
+                </div> */}
                 <div className={styles.chatBoxContainer}>
                     <div className={styles.chatBox}>
                         {
@@ -53,38 +53,41 @@ const ChatBox = () => {
                             <img src={cross} alt="Powered by STEM" />
                         </span>} */}
                         {isLoading && <Loader />}
+                        {/* <Loader /> */}
                     </div>
 
                 </div>
             </div>
-            <form
-                className={styles.chatInputBox}
-                ref={ref}
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    if (inputValue.trim()) { // Check if inputValue is not just whitespace
-                        handleChatInput(inputValue);
-                    }
-                    if (ref?.current) ref.current.reset();
-                    setInput('')
-                }}
-            >
-                <textarea id='ta' placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(event) => {
-                        if (event.key === 'Enter' && !event.shiftKey) {
-                            event.preventDefault();
-                            if (inputValue.trim()) { // Check if inputValue is not just whitespace
-                                handleChatInput(inputValue);
-                                if (ref?.current) ref.current.reset();
-                                setInput('')
+            <div className={`container ${styles['form-container']}`}>
+                <form
+                    className={styles.chatInputBox}
+                    ref={ref}
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        if (inputValue.trim()) { // Check if inputValue is not just whitespace
+                            handleChatInput(inputValue);
+                        }
+                        if (ref?.current) ref.current.reset();
+                        setInput('')
+                    }}
+                >
+                    <textarea id='ta' placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter' && !event.shiftKey) {
+                                event.preventDefault();
+                                if (inputValue.trim()) { // Check if inputValue is not just whitespace
+                                    handleChatInput(inputValue);
+                                    if (ref?.current) ref.current.reset();
+                                    setInput('')
+                                }
                             }
                         }
                     }
-                }
-                ></textarea>
-                <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
+                    ></textarea>
+                    <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
+                </form>
                 <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
-            </form>
+            </div>
             {/* </div> */}
         </>
     );
@@ -93,6 +96,9 @@ const ChatBox = () => {
 export const ChatBoxContainer = () => {
     return <ChatProvider>
         <ChatBox />
+        {/* <div className='container'>
+            <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
+        </div> */}
     </ChatProvider>
 }
 

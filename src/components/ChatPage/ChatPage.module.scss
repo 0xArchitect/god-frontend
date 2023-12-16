@@ -6,6 +6,7 @@
 
   @include tablet() {
     padding: 20px;
+    padding-top: 0;
   }
 }
 
@@ -32,6 +33,7 @@
     justify-content: center;
     align-items: flex-end;
     height: 185px;
+    display: none;
   }
 
 }
@@ -81,10 +83,23 @@
   margin: 0 auto;
   justify-content: flex-end;
   position: relative;
-
-  @include tablet {
-    // padding-top: 80px;
+  padding-top: 120px;
+  &::after {
+    content: "";
+    display: block;
+    width: 500px;
+    height: 200px;
+    position: fixed;
+    top: 0;
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0));
+    @include tablet {
+      height: 100px;
+    }
   }
+
+  
 }
 
 .chatSocial {
@@ -113,6 +128,8 @@
 
   @include tablet {
     padding-bottom: 140px;
+    margin-top: 24px;
+
   }
 
   div {
@@ -157,13 +174,13 @@
   justify-content: space-between;
   position: fixed;
   width: 500px;
-  max-width: calc(100% - 40px);
+  max-width: 100%;
   bottom: 34px;
   left: 50%;
   transform: translateX(-50%);
 
   @include tablet() {
-    bottom: 64px;
+    bottom: 44px;
   }
 }
 
@@ -227,12 +244,13 @@
 
 .stem-logo {
   position: absolute;
-  bottom: -70px;
-  right: 0;
-  max-width: 160px;
+    bottom: 15px;
+    right: 0;
+    max-width: 160px;
 
   @include tablet() {
-    bottom: -45px;
+    position: absolute;
+    bottom:-8px;
     left: 50% !important;
     transform: translateX(-50%);
     right: unset;
@@ -246,9 +264,18 @@
 
 .avatar {
   text-align: center;
-  // @include tablet() {
-  //   display: none;
-  // }
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  img {
+    width: 130px;
+  }
+  @include tablet() {
+    top: 0;
+  }
 }
 
 .loader {
@@ -266,4 +293,12 @@
     width: 10px;
     height: auto;
   }
+}
+.form-container {
+  position: fixed;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1128px;
+  max-width: calc(100% - 40px);
 }
