@@ -3,10 +3,12 @@
 .chat {
   padding: 26px 90px;
   font-family: Segoe UI, sans-serif;
+
   @include tablet() {
     padding: 20px;
   }
 }
+
 .header {
   display: flex;
   flex-direction: row;
@@ -19,24 +21,24 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-  
-    @include tablet() {
-      // justify-content: flex-end;
-      // z-index: 999;
-      // background: #fff;
-      // box-shadow: 0 0 10px #fff;
-      padding: 20px 0;
-      top: 0;
-      justify-content: center;
-      align-items: flex-end;
-      height: 185px;
-    }
-  
+
+  @include tablet() {
+    // justify-content: flex-end;
+    // z-index: 999;
+    // background: #fff;
+    // box-shadow: 0 0 10px #fff;
+    padding: 20px 0;
+    top: 0;
+    justify-content: center;
+    align-items: flex-end;
+    height: 185px;
+  }
+
 }
 
 .logo {
   @include tablet() {
-      display: none;
+    display: none;
   }
 }
 
@@ -45,10 +47,13 @@
   background-color: rgba(53, 146, 255, 0.6);
   padding: 6px 4px;
   border-radius: 6px;
+
   @include tablet() {
     // flex-direction: column;
+    display: none;
     box-shadow: 0px 1px 32px 12px rgba(180, 224, 254, 0.6);
   }
+
   img {
     cursor: pointer;
     // width: 30px;
@@ -76,50 +81,74 @@
   margin: 0 auto;
   justify-content: flex-end;
   position: relative;
+
   @include tablet {
     // padding-top: 80px;
   }
 }
 
-.chatBox {
-    margin-bottom: 24px;
+.chatSocial {
+  display: none;
+  @include tablet {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-bottom: 100px;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .social {
     @include tablet {
-      padding-bottom: 140px;
+      display: flex;
+      // padding-top: 80px;
     }
-    div {
-        font-size: 16px;
-        line-height: 22px;
-        padding: 12px 24px;
-        color: $white;
-        background-color: rgba(53, 146, 255, 0.6);
-        float: left;
-        max-width: calc(100% - 30px);
-        margin-top: 24px;
-        border-radius: 8px;
-        position: relative;
-        align-self: start;
-        word-wrap: break-word;
-        &:first-child {
-          margin-top: 0;
-        }
-        @include mobile() {
-          font-size: 14px;
-          line-height: 20px;
-          padding: 12px 24px;
-        }
+  }
+}
+
+.chatBox {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 100px;
+
+  @include tablet {
+    padding-bottom: 140px;
+  }
+
+  div {
+    font-size: 16px;
+    line-height: 22px;
+    padding: 12px 24px;
+    color: $white;
+    background-color: rgba(53, 146, 255, 0.6);
+    float: left;
+    max-width: calc(100% - 30px);
+    margin-top: 24px;
+    border-radius: 8px;
+    position: relative;
+    align-self: start;
+    word-wrap: break-word;
+
+    &:first-child {
+      margin-top: 0;
     }
-    .bg-white {
-        background-color: rgba(255, 255, 255, 0.80);
-        color: #0F0F0F;
+
+    @include mobile() {
+      font-size: 14px;
+      line-height: 20px;
+      padding: 12px 24px;
     }
-    .right {
-      float: right;
-      align-self: end;
-    }
+  }
+
+  .bg-white {
+    background-color: rgba(255, 255, 255, 0.80);
+    color: #0F0F0F;
+  }
+
+  .right {
+    float: right;
+    align-self: end;
+  }
 }
 
 .chatInputBox {
@@ -132,20 +161,22 @@
   bottom: 34px;
   left: 50%;
   transform: translateX(-50%);
+
   @include tablet() {
     bottom: 64px;
   }
 }
+
 .chatInput {
-    font-size: 16px;
-    line-height: 22px;
-    padding: 12px 24px;
-    width: calc(100% - 84px);
-    outline: none;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 30px 0px 32px 25px rgba(180, 224, 254, 0.6);
-    min-height: 80px;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 12px 24px;
+  width: calc(100% - 84px);
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 30px 0px 32px 25px rgba(180, 224, 254, 0.6);
+  min-height: 80px;
 }
 
 .note {
@@ -154,6 +185,7 @@
   font-size: 12px;
   max-width: 500px;
   margin: 0 auto 24px;
+
   @include tablet() {
     margin: 50px auto 24px;
   }
@@ -174,17 +206,18 @@
 
 .play-btn {
   position: absolute;
-    background-color: rgba(53, 146, 255, 0.6);
-    right: -30px;
-    bottom: 0;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(255,255,255,.9);
-    box-shadow: 0 0 10px rgba(255,255,255,.8);
+  background-color: rgba(53, 146, 255, 0.6);
+  right: -30px;
+  bottom: 0;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 0 10px rgba(255, 255, 255, .8);
+
   img {
     height: 12px;
     width: 12px;
@@ -197,6 +230,7 @@
   bottom: -70px;
   right: 0;
   max-width: 160px;
+
   @include tablet() {
     bottom: -45px;
     left: 50% !important;
@@ -209,6 +243,7 @@
 .cover {
   // position: absolute;
 }
+
 .avatar {
   text-align: center;
   // @include tablet() {
@@ -226,6 +261,7 @@
   padding: 6px 4px;
   max-width: 50px;
   box-shadow: 0px 1px 32px 12px rgba(180, 224, 254, 0.6);
+
   img {
     width: 10px;
     height: auto;

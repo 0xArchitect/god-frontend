@@ -7,6 +7,11 @@ import avatar from './../../assets/images/avatar.svg';
 import stemLogo from './../../assets/images/stem.png'
 import cross from './../../assets/images/cross.png';
 import Loader from './Loader';
+import twitter from './../../assets/images/twitter.svg'
+import telegram from './../../assets/images/telegram.svg'
+import vector from './../../assets/images/vector.svg'
+import { Link } from "react-router-dom";
+
 
 const ChatBox = () => {
     const { handleChatInput, chatList, isLoading } = useChatContext();
@@ -25,6 +30,13 @@ const ChatBox = () => {
             <div className={styles.box}>
                 <div className={styles.avatar}>
                     <img src={avatar} alt="avatar" className='' />
+                </div>
+                <div className={styles.chatSocial}>
+                    <div className={styles.social}>
+                        <Link className='social-link' to="https://twitter.com/" target='_blank' title='Twitter' > <img src={twitter} alt="Twitter" /> </Link>
+                        <Link className='social-link' to="https://web.telegram.org/" target='_blank' title='Telegram' > <img src={telegram} alt="Telegram" /> </Link>
+                        <Link className='social-link' to="https://google.com" target='_blank' title='ChatGPT'> <img src={vector} alt="logo a" /> </Link>
+                    </div>
                 </div>
                 <div className={styles.note}>
                     Note: This is a simulated chat with $Lord using AI.
