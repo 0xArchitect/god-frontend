@@ -272,6 +272,21 @@ export default function ChatProvider({ children }) {
     // })
   }, []);
 
+  const docClick = useCallback(() => {
+    const currentItem = chatList?.[0];
+    if (currentItem && !isPlaying && chatList?.length == 1) {
+      setBufferContext(currentItem?.voice)
+      setCurrentIndex(0)
+    }
+  }, [chatList, isPlaying])
+
+  useEffect(() => {
+    document.body.addEventListener('click', docClick);
+    return () => {
+      document.body.removeEventListener('click', docClick);
+    }
+  }, [chatList, isPlaying])
+
   return <Provider value={contextValue}>{children} </Provider>;
 }
 
