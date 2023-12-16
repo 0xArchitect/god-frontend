@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 const ChatContext = createContext({});
 const { Provider } = ChatContext;
 
-const ENDPOINT = 'https://02f5-2405-201-1f-1161-9c9b-2da4-cf3b-73af.ngrok-free.app';
+const ENDPOINT = 'http://18.232.203.193';
 
 export const useChatContext = () => {
   return useContext(ChatContext);
