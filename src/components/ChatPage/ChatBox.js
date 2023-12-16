@@ -39,7 +39,7 @@ const ChatBox = () => {
                     </div>
                 </div>
                 <div className={styles.note}>
-                    Note: This is a simulated chat with $Lord using AI.
+                    Note: This is a simulated chat with GOD using AI.
                 </div>
                 <div className={styles.chatBoxContainer}>
                     <div className={styles.chatBox}>
@@ -62,20 +62,25 @@ const ChatBox = () => {
                 ref={ref}
                 onSubmit={(e) => {
                     e.preventDefault();
-                    handleChatInput(inputValue);
+                    if (inputValue.trim()) { // Check if inputValue is not just whitespace
+                        handleChatInput(inputValue);
+                    }
                     if (ref?.current) ref.current.reset();
                     setInput('')
                 }}
             >
                 <textarea id='ta' placeholder='Write a message' type='text' className={styles.chatInput} onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(event) => {
-                        if (event.key === 'Enter') {
-                            handleChatInput(inputValue);
-                            if (ref?.current) ref.current.reset();
-                            setInput('')
+                        if (event.key === 'Enter' && !event.shiftKey) {
+                            event.preventDefault();
+                            if (inputValue.trim()) { // Check if inputValue is not just whitespace
+                                handleChatInput(inputValue);
+                                if (ref?.current) ref.current.reset();
+                                setInput('')
+                            }
                         }
                     }
-                    }
+                }
                 ></textarea>
                 <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
                 <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />

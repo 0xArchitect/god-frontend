@@ -194,7 +194,7 @@ export default function ChatProvider({ children }) {
   const triggerInitChat = useCallback(() => {
     if (isLoading) return;
 
-    const chat = 'Greetings, my friend. I am $LORD, the Son of God. May I kindly ask for your name?'
+    const chat = 'Greetings, my friend. I am GOD, May I kindly ask for your name?'
 
     setIsLoading(true)
 
