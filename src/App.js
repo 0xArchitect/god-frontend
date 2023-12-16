@@ -9,8 +9,8 @@ function App() {
     <PageProvider>
       <Router>
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/chat" element={<ChatPage />} />
+          {/* <Route exact path="/" element={<HomePage />} /> */}
+          <Route exact path="/" element={<ChatPage />} />
         </Routes>
       </Router>
     </PageProvider>
