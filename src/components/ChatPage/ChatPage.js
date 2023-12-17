@@ -57,8 +57,12 @@ const ChatPage = () => {
         <div className={styles.chat}>
             <div className='bg-image'></div>
             <div className={styles.header}>
-                <div className={styles.logo} >
+                {/* <div className={styles.logo} >
                     <Link to="/"><img src={logo} alt="Logo" /></Link>
+                </div> */}
+                <div className={styles.menu} >
+                    <Link to="/" className={styles.active}>Home</Link>
+                    <Link to="/info" >Info</Link>
                 </div>
                 {/* <div>
                     <img src={avatar} alt="avatar" className='' />
