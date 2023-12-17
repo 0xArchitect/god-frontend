@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 const ChatContext = createContext({});
 const { Provider } = ChatContext;
 
-const ENDPOINT = 'https://02f5-2405-201-1f-1161-9c9b-2da4-cf3b-73af.ngrok-free.app';
+const ENDPOINT = 'https://jesusai-dyvdf.ondigitalocean.app';
 
 export const useChatContext = () => {
   return useContext(ChatContext);
@@ -271,6 +271,21 @@ export default function ChatProvider({ children }) {
     //   chatId: storedChatId
     // })
   }, []);
+
+  const docClick = useCallback(() => {
+    const currentItem = chatList?.[0];
+    if (currentItem && !isPlaying && chatList?.length == 1) {
+      setBufferContext(currentItem?.voice)
+      setCurrentIndex(0)
+    }
+  }, [chatList, isPlaying])
+
+  useEffect(() => {
+    document.body.addEventListener('click', docClick);
+    return () => {
+      document.body.removeEventListener('click', docClick);
+    }
+  }, [chatList, isPlaying])
 
   return <Provider value={contextValue}>{children} </Provider>;
 }
