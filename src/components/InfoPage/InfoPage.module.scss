@@ -247,19 +247,19 @@
             }
         }
         h2 {
-            font-size: 50px;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             @include tablet {
                 font-size: 30px;
                 margin-bottom: 10px;
             }
         }
         h3 {
-            font-size: 30px;
+            font-size: 24px;
             font-weight: 790;
             line-height: 1.4;
-            margin-bottom: 15px;
+            margin-bottom: 0;
             @include tablet {
                 font-size: 27px;
                 margin-bottom: 5px;
@@ -294,6 +294,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        max-width: 512px;
 
         div {
             background: #fff;
@@ -303,10 +304,14 @@
             width: calc(50% - 20px);
             margin: 10px;
             border-top: 5px solid #3592ff;
+            &:last-child {
+              width: 100%;
+            }
             @include tablet() {
               width: 100%;
               margin: 10px 0;
             }
+            
         }
         .supply {
           @include tablet() {
@@ -348,6 +353,7 @@
 	justify-content: center;
 	align-items: center;
   width: 100%;
+  max-width: 512px;
     :global {
         li {
             display: flex;
@@ -377,7 +383,7 @@
                 margin-right: 15px;
                 padding-bottom: 5px;
                 white-space: nowrap;
-                width: 25%;
+                width: 40%;
             }
             
             div {
