@@ -42,22 +42,22 @@ textarea {
   position: relative;
 }
 .bg-image {
-	background-image: url(./../assets/images/bg-image.svg);
-	background-size: cover;
-	background-position: 50% 40%;
-	background-repeat: no-repeat;
-	background-color: rgb(43, 103, 175);
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: -1;
-	animation: bg-pulse 25s ease-in-out infinite;
-	filter: brightness(1.5) blur(18px);
-	filter: brightness(1) blur(0px);
-	filter: none;
-	transform: scale(1.0);
+  background-image: url(./../assets/images/bg-image.svg);
+  background-size: cover;
+  background-position: 50% 40%;
+  background-repeat: no-repeat;
+  background-color: rgb(43, 103, 175);
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  animation: bg-pulse 25s ease-in-out infinite;
+  filter: brightness(1.5) blur(18px);
+  filter: brightness(1) blur(0px);
+  filter: none;
+  transform: scale(1);
   @media screen and (max-width: 768px) {
     background-position: 50% -140%;
   }
@@ -69,39 +69,39 @@ input {
 }
 
 textarea {
-  padding: 15px 24px!important;
+  padding: 15px 24px !important;
 }
 
 @keyframes bg-pulse {
   0% {
-      transform: scale(1.0);
+    transform: scale(1);
   }
   50% {
-      transform: scale(1.1);
+    transform: scale(1.1);
   }
   100% {
-      transform: scale(1.0);
+    transform: scale(1);
   }
 }
 
 .heading {
   font-size: 40px;
   line-height: 1.5;
-  font-family: 'Gambarino-Regular';
+  font-family: "Gambarino-Regular";
   margin-bottom: 24px;
-  text-shadow: 0 4px 4px rgba(0,0,0,.25);
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
   @include tablet() {
     font-size: 30px;
   }
   @include mobile() {
-      font-size: 25px;
+    font-size: 25px;
   }
 }
 
 .btn {
-  background-color: #D9D9D9;
-  font-family: 'Gambarino-Regular';
+  background-color: #d9d9d9;
+  font-family: "Gambarino-Regular";
   font-size: 20px;
   line-height: 1.5;
   color: #000;
@@ -109,16 +109,15 @@ textarea {
   padding: 12px 24px;
   border: 1px solid $black;
   &:hover {
-      background-color: #393939;
-      color: $white;
+    background-color: #393939;
+    color: $white;
   }
   @include tablet() {
     font-size: 18px;
   }
   @include mobile() {
-      font-size: 16px;
+    font-size: 16px;
   }
-  
 }
 
 .fade-out {
@@ -129,4 +128,14 @@ textarea {
 
 .fade-out.off-screen {
   opacity: 0;
+}
+
+.fadeIn {
+  opacity: 1;
+  transition: opacity 0.2s ease-in;
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
 }
