@@ -321,6 +321,7 @@
     width: unset;
   }
   a {
+    display: inline-block;
     background-color: #3592ff;
     color: #fff;
     padding: 15px 20px;
@@ -332,6 +333,11 @@
     &.active {
         background-color: #3592ff;
         color: #fff;
+        transform: scale(1.05);
+    }
+    &:hover {
+      // transform: translate(0.075rem, 0.075rem);
+      transform: scale(1.08) ;
     }
   }
 }
