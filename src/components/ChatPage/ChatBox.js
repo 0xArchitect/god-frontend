@@ -82,11 +82,15 @@ const ChatBox = () => {
                                 }
                             }
                         }
-                    }
+                        }
                     ></textarea>
                     <button className={styles['send-button']} ><img src={sendImg} alt="Send" /></button>
                 </form>
-                <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
+                <div className={`container ${styles['form-container']}`}>
+                    <Link to="https://www.stem.computer/" target="_blank">
+                        <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
+                    </Link>
+                </div>
             </div>
             {/* </div> */}
         </>
