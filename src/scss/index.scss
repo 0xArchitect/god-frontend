@@ -3,10 +3,11 @@
 @import "mixins.scss";
 
 body {
-  font-family: sans-serif;
+  // font-family: sans-serif;
   // scroll-snap-type: y mandatory;
   // overflow-y: auto;
   // scroll-behavior: smooth;
+  font-family: Segoe UI, sans-serif;
   section {
     scroll-snap-align: start;
   }

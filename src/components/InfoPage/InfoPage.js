@@ -15,7 +15,7 @@ import styles from './InfoPage.module.scss';
 const InfoPage = () => {
     return (
         <>
-            <div className={styles.inf}>
+            <div className={styles.desktopVisible}>
                 <div className={styles.header}>
                     <div className={`${styles.menu} ${styles.isMenuDesktop}`} >
                         <Link to="/">Home</Link>
@@ -52,6 +52,38 @@ const InfoPage = () => {
             <div className='bg-image'></div>
             <div className={`${styles.box} box-container`}>
                 <section className={styles.aboutus}>
+                    <div className={`${styles.mobileVisible} ${styles.mobileMenu}`}>
+                        <div className={styles.header}>
+                            <div className={`${styles.menu} ${styles.isMenuDesktop}`} >
+                                <Link to="/">Home</Link>
+                                <Link to="/info" className={styles.active}>Info</Link>
+                            </div>
+                            {/* <div>
+                            <img src={avatar} alt="avatar" className='' />
+                        </div> */}
+                            <div>
+                                <div className={styles.social}>
+                                    <Link className='social-link' to="https://twitter.com/" target='_blank' title='Twitter' > <img src={twitter} alt="Twitter" /> </Link>
+                                    <Link className='social-link' to="https://web.telegram.org/" target='_blank' title='Telegram' > <img src={telegram} alt="Telegram" /> </Link>
+                                    <Link className='social-link' to="https://google.com" target='_blank' title='ChatGPT'> <img src={vector} alt="logo a" /> </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.avatar}>
+                            <img src={avatar} alt="avatar" className='' />
+                        </div>
+                        <div className={styles.chatSocial}>
+                            <div className={styles.menu} >
+                                <Link className={styles.navLink} to="/">Home</Link>
+                                <Link to="/info" className={styles.navLink}>Info</Link>
+                            </div>
+                            <div className={`${styles.social} ${styles.mobileVisible}`}>
+                                <Link className='social-link' to="https://twitter.com/" target='_blank' title='Twitter' > <img src={twitter} alt="Twitter" /> </Link>
+                                <Link className='social-link' to="https://web.telegram.org/" target='_blank' title='Telegram' > <img src={telegram} alt="Telegram" /> </Link>
+                                <Link className='social-link' to="https://google.com" target='_blank' title='ChatGPT'> <img src={vector} alt="logo a" /> </Link>
+                            </div>
+                        </div>
+                    </div>
                     <h1>About</h1>
                     <p className={styles.textContainer}>In a collaborative effort with StemTech, .STEM_ emerges as innovative convergence of artificial intelligence, machine learning, and large language models (LLMs). Together using there neural networks, we will spearhead a paradigm shift in conversational AI, fundamentally reconceptualizing the dynamics of interaction.</p>
                 </section>
@@ -107,6 +139,12 @@ const InfoPage = () => {
                             </div>
                         </li>
                     </ul>
+
+                    <div className={`container ${styles['form-container']}`}>
+                        <Link to="https://www.stem.computer/" target="_blank">
+                            <img src={stemLogo} alt="Powered by STEM" className={styles['stem-logo']} />
+                        </Link>
+                    </div>
                 </section>
             </div>
         </>

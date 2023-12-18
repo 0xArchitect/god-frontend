@@ -131,7 +131,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    padding: 120px 20px 20px;
+    padding: 120px 0 20px;
     }
     .menu {
       width: unset;
@@ -286,6 +286,9 @@
 
   .tokenomics {
     margin-bottom: 10%;
+    @include tablet(){
+      padding-top: 160px;
+    }
     .gridContainer {
         width: 100%;
         display: flex;
@@ -316,23 +319,26 @@
   
   
   .roadmap {
-	margin-top: -10px;
-	padding: 20px 0;
-	h2 {
-		color: #000;
-		font-size: 70px;
-		font-style: normal;
-		font-weight: 400;
-		line-height: normal;
-		text-align: center;
-		font-size: 10vw;
-	}
-	p {
-		font-size: 2vw;
-	}
-	div {
-		text-align: left;
-	}
+    margin-top: -10px;
+    padding: 20px 0;
+    @include tablet(){
+      padding-top: 160px;
+    }
+    h2 {
+      color: #000;
+      font-size: 70px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-align: center;
+      font-size: 10vw;
+    }
+    p {
+      font-size: 2vw;
+    }
+    div {
+      // text-align: left;
+    }
 }
 .roadmap-list {
 	margin-left: auto;
@@ -389,4 +395,18 @@
     @include tablet {
         display: flex;
     }
+}
+.desktopVisible {
+  display: flex;
+  @include tablet {
+      display: none;
+  }
+}
+.mobileMenu {
+  @include tablet {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  }
 }
