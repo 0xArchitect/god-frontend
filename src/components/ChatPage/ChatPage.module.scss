@@ -317,6 +317,9 @@
     flex-direction: row;
     justify-content: space-between;
   }
+  @include mobile() {
+    width: unset;
+  }
   a {
     background-color: #fff;
     padding: 15px 20px;
