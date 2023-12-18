@@ -120,3 +120,13 @@ textarea {
   }
   
 }
+
+.fade-out {
+  transition: opacity 1s ease;
+  animation-delay: 0.5s;
+  opacity: 1;
+}
+
+.fade-out.off-screen {
+  opacity: 0;
+}

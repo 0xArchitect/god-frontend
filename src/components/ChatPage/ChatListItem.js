@@ -90,17 +90,53 @@ const ChatListItem = ({
     // }, [source])
 
     const isCurrentPlaying = currentIndex === index;
+    const chatRef = useRef(null);
+
+    const resultRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(styles.fadeIn);
+                    entry.target.classList.remove(styles.fadeOut);
+                } else {
+                    entry.target.classList.remove(styles.fadeIn);
+                    entry.target.classList.add(styles.fadeOut);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '-180px 0px 0px 0px' // top, right, bottom, left
+        });
+
+        if (chatRef.current) {
+            observer.observe(chatRef.current);
+        }
+        if (resultRef.current) {
+            observer.observe(resultRef.current);
+        }
+
+        return () => {
+            if (chatRef.current) {
+                observer.unobserve(chatRef.current);
+            }
+            if (resultRef.current) {
+                observer.unobserve(resultRef.current);
+            }
+        };
+    }, []);
 
     return (
         <>
             {/* // <div className={styles.chatBox}> */}
             {chat &&
-                <div className={`${styles.chat} ${styles['bg-white']} ${styles.right}`}>
+                <div ref={chatRef} className={`${styles.chat} ${styles['bg-white']} ${styles.right} ${styles.fadeOut}`}>
                     {chat}
                 </div>
             }
             {result &&
-                <div className={`${styles.result}`}>
+                <div ref={resultRef} className={`${styles.result} ${styles.fadeOut}`}>
                     {result}
                     {voice && <span className={styles['play-btn']} onClick={() => {
                         if (isCurrentPlaying) {

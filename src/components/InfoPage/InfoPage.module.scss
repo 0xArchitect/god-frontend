@@ -74,23 +74,26 @@
     }
     a {
       // background-color: #fff;
+      display: inline-block;
       background-color: #3592ff;
       color: #fff;
       padding: 15px 20px;
       margin-right: 10px;
       border-radius: 8px;
       font-weight: 700;
-      transition: all 0.15s ease-in-out;
+      transition: all .3s ease-in-out;
       box-shadow: 0px 1px 32px 12px rgba(180, 224, 254, 0.4);
       @include tablet() {
         font-size: 12px;
       }
       &.active {
-          background-color: #3592ff;
-          color: #fff;
+        background-color: #3592ff;
+        color: #fff;
+        transform: scale(1.05);
       }
       &:hover {
-        transform: translate(0.075rem, 0.075rem);
+        // transform: translate(0.075rem, 0.075rem);
+        transform: scale(1.08) ;
       }
     }
   }

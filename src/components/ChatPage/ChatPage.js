@@ -60,8 +60,8 @@ const ChatPage = () => {
                 {/* <div className={styles.logo} >
                     <Link to="/"><img src={logo} alt="Logo" /></Link>
                 </div> */}
-                <div className={styles.menu} >
-                    <Link to="/">Home</Link>
+                <div className={`${styles.menu} ${styles.isMenuDesktop}`} >
+                    <Link to="/" className={styles.active}>Home</Link>
                     <Link to="/info" >Info</Link>
                 </div>
                 {/* <div>
