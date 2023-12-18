@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import Tuna from "tunajs";
-
 const ChatContext = createContext({});
 const { Provider } = ChatContext;
 
@@ -54,17 +53,6 @@ export default function ChatProvider({ children }) {
   const [startOffset, setStartOffset] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(null);
-  const [tuna, setTuna] = useState(null);
-
-  useEffect(() => {
-    console.log("audio", audioContext, tuna)
-    if (audioContext && !tuna) {
-      const newTuna = new Tuna(audioContext);
-      setTuna(newTuna);
-      console.log("TUNE IN", newTuna)
-    }
-  }, [audioContext]);
-
 
   useEffect(() => {
     return () => {
@@ -85,26 +73,6 @@ export default function ChatProvider({ children }) {
     const arrayBuffer1 = uint8Array.buffer
     context.decodeAudioData(arrayBuffer1, (decodedBuffer) => {
       setAudioBuffer(decodedBuffer);
-      console.log("tuna", tuna)
-
-      // Assuming you want to add an Overdrive effect
-      if (tuna) {
-        const overdrive = new tuna.Overdrive({
-          outputGain: 0,         // 0 to 1+
-          drive: 0,              // 0 to 1
-          curveAmount: 0,          // 0 to 1
-          algorithmIndex: 0,       // 0 to 5, selects one of our drive algorithms
-          bypass: 0
-        });
-
-        console.log("overdrive", overdrive)
-
-        // Connect the source to the effect and then to the destination
-        const source = audioContext.createBufferSource();
-        source.buffer = decodedBuffer;
-        source.connect(overdrive.input);
-        overdrive.connect(audioContext.destination);
-      }
     });
 
   }, [audioSource])
@@ -121,8 +89,17 @@ export default function ChatProvider({ children }) {
     } else {
       // Play the audio
       const source = audioContext.createBufferSource();
+      var tuna = new Tuna(audioContext);
+      var chorus = new tuna.PingPongDelay({
+        wetLevel: 0.3,       //0 to 1
+        feedback: 0.3,       //0 to 1
+        delayTimeLeft: 400,  //1 to 10000 (milliseconds)
+        delayTimeRight: 400  //1 to 10000 (milliseconds)
+    });
       source.buffer = audioBuffer;
-      source.connect(audioContext.destination);
+      // source.connect(audioContext.destination);
+      source.connect(chorus);
+      chorus.connect(audioContext.destination);
       source.start(0, startOffset % audioBuffer.duration);
       source.startTime = audioContext.currentTime;
 
@@ -248,7 +225,6 @@ export default function ChatProvider({ children }) {
           setCurrentIndex(0);
         }
       }).catch((e) => {
-        console.error("e", e)
         setIsLoading(false)
         updateChat({
           trouble: true,
