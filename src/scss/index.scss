@@ -4,9 +4,9 @@
 
 body {
   font-family: sans-serif;
-  scroll-snap-type: y mandatory;
-  overflow-y: auto;
-  scroll-behavior: smooth;
+  // scroll-snap-type: y mandatory;
+  // overflow-y: auto;
+  // scroll-behavior: smooth;
   section {
     scroll-snap-align: start;
   }
@@ -138,4 +138,32 @@ textarea {
 .fadeOut {
   opacity: 0;
   transition: opacity 0.2s ease-out;
+}
+
+.main-container {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.box-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+
+  section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1128px;
+    margin: auto;
+  }
+}
+
+#root {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

@@ -188,12 +188,13 @@
     // display: flex;
     justify-content: space-between;
     flex-direction: column;
-    max-width: 1128px;
+    // max-width: 1128px;
     margin: 0 auto;
     justify-content: flex-end;
     position: relative;
-    padding-top: 120px;
-    padding-bottom: 100px;
+    width: 100%;
+    // padding-top: 120px;
+    // padding-bottom: 100px;
     scroll-snap-type: y mandatory;
     overflow-y: auto;
     scroll-behavior: smooth;
