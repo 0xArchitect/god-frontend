@@ -95,57 +95,75 @@ const ChatListItem = ({
     const resultRef = useRef(null);
 
     useEffect(() => {
+        const handleScroll = () => {
+            var elementHeight = document.querySelector('.avatar').offsetHeight;
+            var checkWith = window.scrollY + elementHeight / 2;
+            var cols = document.querySelectorAll('.chat-li');
+            cols.forEach((col) => {
+                var top = col.offsetTop;
+                if (top > checkWith) {
+                    col.classList.add('fadeIn');
+                    col.classList.remove('fadeOut');
+                } else {
+                    col.classList.remove('fadeIn');
+                    col.classList.add('fadeOut');
+                }
+            })
+        }
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
         // Delayed execution to ensure elements are in DOM
-        setTimeout(() => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add(styles.fadeIn);
-                        entry.target.classList.remove(styles.fadeOut);
-                    } else {
-                        entry.target.classList.remove(styles.fadeIn);
-                        entry.target.classList.add(styles.fadeOut);
-                    }
-                });
-            }, {
-                threshold: 1,
-                rootMargin: '-180px 0px 0px 0px'
-            });
+        // setTimeout(() => {
+        //     const observer = new IntersectionObserver((entries) => {
+        //         entries.forEach(entry => {
+        //             if (entry.isIntersecting) {
+        //                 entry.target.classList.add(styles.fadeIn);
+        //                 entry.target.classList.remove(styles.fadeOut);
+        //             } else {
+        //                 entry.target.classList.remove(styles.fadeIn);
+        //                 entry.target.classList.add(styles.fadeOut);
+        //             }
+        //         });
+        //     }, {
+        //         threshold: 1,
+        //         rootMargin: '-180px 0px 0px 0px'
+        //     });
 
-            const chatElement = chatRef.current;
-            const resultElement = resultRef.current;
+        //     const chatElement = chatRef.current;
+        //     const resultElement = resultRef.current;
 
-            if (chatElement) {
-                observer.observe(chatElement);
-                if (chatElement.getBoundingClientRect().top < window.innerHeight) {
-                    chatElement.classList.add(styles.fadeIn);
-                }
-            }
-            if (resultElement) {
-                observer.observe(resultElement);
-            }
-
-            return () => {
-                if (chatElement) {
-                    observer.unobserve(chatElement);
-                }
-                if (resultElement) {
-                    observer.unobserve(resultElement);
-                }
-            };
-        }, 100); // Delay of 100ms
+        //     if (chatElement) {
+        //         observer.observe(chatElement);
+        //         if (chatElement.getBoundingClientRect().top < window.innerHeight) {
+        //             chatElement.classList.add(styles.fadeIn);
+        //         }
+        //     }
+        //     if (resultElement) {
+        //         observer.observe(resultElement);
+        //     }
+        //     return () => {
+        //         if (chatElement) {
+        //             observer.unobserve(chatElement);
+        //         }
+        //         if (resultElement) {
+        //             observer.unobserve(resultElement);
+        //         }
+        //     };
+        // }, 100); // Delay of 100ms
     }, []);
 
     return (
         <>
             {/* // <div className={styles.chatBox}> */}
             {chat &&
-                <div ref={resultRef} className={`${styles.chat} ${styles['bg-white']} ${styles.right} ${styles.fadeOut}`}>
+                <div ref={resultRef} className={`${styles.chat} chat-li ${styles['bg-white']} ${styles.right}`}>
                     {chat}
                 </div>
             }
             {result &&
-                <div ref={chatRef} className={`${styles.result} ${styles.left} ${styles.fadeOut}`}>
+                <div ref={chatRef} className={`${styles.result} chat-li ${styles.left}`}>
                     {result}
                     {voice && <span className={styles['play-btn']} onClick={() => {
                         if (isCurrentPlaying) {

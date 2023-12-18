@@ -28,13 +28,13 @@ const ChatBox = () => {
     return (
         <>
             <div className={styles.box}>
-                <div className={styles.avatar}>
+                <div className={`${styles.avatar} avatar`}>
                     <img src={avatar} alt="avatar" className='' />
                 </div>
                 <div className={styles.chatSocial}>
-                <div className={styles.menu} >
+                    <div className={styles.menu} >
                         <Link className={styles.navLink} to="/">Home</Link>
-                        <Link  to="/info" className={styles.navLink}>Info</Link>
+                        <Link to="/info" className={styles.navLink}>Info</Link>
                     </div>
                     <div className={styles.social}>
                         <Link className='social-link' to="https://twitter.com/" target='_blank' title='Twitter' > <img src={twitter} alt="Twitter" /> </Link>
