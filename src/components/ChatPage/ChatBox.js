@@ -32,6 +32,10 @@ const ChatBox = () => {
                     <img src={avatar} alt="avatar" className='' />
                 </div>
                 <div className={styles.chatSocial}>
+                <div className={styles.menu} >
+                        <Link className={styles.navLink} to="/">Home</Link>
+                        <Link  to="/info" className={styles.navLink}>Info</Link>
+                    </div>
                     <div className={styles.social}>
                         <Link className='social-link' to="https://twitter.com/" target='_blank' title='Twitter' > <img src={twitter} alt="Twitter" /> </Link>
                         <Link className='social-link' to="https://web.telegram.org/" target='_blank' title='Telegram' > <img src={telegram} alt="Telegram" /> </Link>
