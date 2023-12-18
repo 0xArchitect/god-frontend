@@ -95,48 +95,57 @@ const ChatListItem = ({
     const resultRef = useRef(null);
 
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add(styles.fadeIn);
-                    entry.target.classList.remove(styles.fadeOut);
-                } else {
-                    entry.target.classList.remove(styles.fadeIn);
-                    entry.target.classList.add(styles.fadeOut);
-                }
+        // Delayed execution to ensure elements are in DOM
+        setTimeout(() => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add(styles.fadeIn);
+                        entry.target.classList.remove(styles.fadeOut);
+                    } else {
+                        entry.target.classList.remove(styles.fadeIn);
+                        entry.target.classList.add(styles.fadeOut);
+                    }
+                });
+            }, {
+                threshold: 1,
+                rootMargin: '-180px 0px 0px 0px'
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '-180px 0px 0px 0px' // top, right, bottom, left
-        });
 
-        if (chatRef.current) {
-            observer.observe(chatRef.current);
-        }
-        if (resultRef.current) {
-            observer.observe(resultRef.current);
-        }
+            const chatElement = chatRef.current;
+            const resultElement = resultRef.current;
 
-        return () => {
-            if (chatRef.current) {
-                observer.unobserve(chatRef.current);
+            if (chatElement) {
+                observer.observe(chatElement);
+                if (chatElement.getBoundingClientRect().top < window.innerHeight) {
+                    chatElement.classList.add(styles.fadeIn);
+                }
             }
-            if (resultRef.current) {
-                observer.unobserve(resultRef.current);
+            if (resultElement) {
+                observer.observe(resultElement);
             }
-        };
+
+            return () => {
+                if (chatElement) {
+                    observer.unobserve(chatElement);
+                }
+                if (resultElement) {
+                    observer.unobserve(resultElement);
+                }
+            };
+        }, 100); // Delay of 100ms
     }, []);
 
     return (
         <>
             {/* // <div className={styles.chatBox}> */}
             {chat &&
-                <div ref={chatRef} className={`${styles.chat} ${styles['bg-white']} ${styles.right} ${styles.fadeOut}`}>
+                <div ref={resultRef} className={`${styles.chat} ${styles['bg-white']} ${styles.right} ${styles.fadeOut}`}>
                     {chat}
                 </div>
             }
             {result &&
-                <div ref={resultRef} className={`${styles.result} ${styles.fadeOut}`}>
+                <div ref={chatRef} className={`${styles.result} ${styles.left} ${styles.fadeOut}`}>
                     {result}
                     {voice && <span className={styles['play-btn']} onClick={() => {
                         if (isCurrentPlaying) {
