@@ -10,6 +10,10 @@
   }
 }
 
+.active{
+  background-color: #0c4281;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -346,7 +350,7 @@
       font-size: 12px;
     }
     &.active {
-        background-color: #3592ff;
+        background-color: #0c4281;
         color: #fff;
         transform: scale(1.05);
     }

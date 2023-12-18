@@ -11,9 +11,10 @@ import twitter from './../../assets/images/twitter.svg'
 import telegram from './../../assets/images/telegram.svg'
 import vector from './../../assets/images/vector.svg'
 import { Link } from "react-router-dom";
-
+import { useLocation } from 'react-router-dom';
 
 const ChatBox = () => {
+    let location = useLocation();
     const { handleChatInput, chatList, isLoading } = useChatContext();
     const [inputValue, setInput] = React.useState('');
     const ref = useRef(null)
@@ -33,7 +34,7 @@ const ChatBox = () => {
                 </div>
                 <div className={styles.chatSocial}>
                     <div className={styles.menu} >
-                        <Link className={styles.navLink} to="/">Home</Link>
+                        <Link className={`${location.pathname == "/" && styles.active} ${styles.navLink}`} to="/">Home</Link>
                         <Link to="/info" className={styles.navLink}>Info</Link>
                     </div>
                     <div className={styles.social}>
