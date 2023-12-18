@@ -91,10 +91,10 @@ export default function ChatProvider({ children }) {
       const source = audioContext.createBufferSource();
       var tuna = new Tuna(audioContext);
       var chorus = new tuna.PingPongDelay({
-        wetLevel: 0.3,       //0 to 1
-        feedback: 0.3,       //0 to 1
-        delayTimeLeft: 400,  //1 to 10000 (milliseconds)
-        delayTimeRight: 400  //1 to 10000 (milliseconds)
+        wetLevel: 0.1,       //0 to 1
+        feedback: 0.1,       //0 to 1
+        delayTimeLeft: 150,  //1 to 10000 (milliseconds)
+        delayTimeRight: 150  //1 to 10000 (milliseconds)
     });
       source.buffer = audioBuffer;
       // source.connect(audioContext.destination);
