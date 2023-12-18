@@ -39,6 +39,7 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
+    padding: 26px 0;
   
     @include tablet() {
       width: unset;
@@ -52,6 +53,7 @@
       align-items: flex-end;
       transform: unset;
       position: unset;
+      display: none;
     //   height: 185px;
       // margin-top: 20px;
     //   display: none;
@@ -129,6 +131,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
+    padding: 120px 20px 20px;
     }
     .menu {
       width: unset;
@@ -188,20 +191,20 @@
     // display: flex;
     justify-content: space-between;
     flex-direction: column;
-    max-width: 1128px;
+    // max-width: 1128px;
     margin: 0 auto;
     justify-content: flex-end;
     position: relative;
-    padding-top: 120px;
-    padding-bottom: 100px;
+    width: 100%;
+    // padding-top: 120px;
+    // padding-bottom: 100px;
     scroll-snap-type: y mandatory;
     overflow-y: auto;
     scroll-behavior: smooth;
 
     @include tablet {
-      padding-top: 90px;
-      padding-bottom: 10px;
-      }
+      padding: 90px 20px 10px;
+    }
     &::after {
       // content: "";
       display: block;
@@ -299,6 +302,7 @@
             border-top: 5px solid #3592ff;
             @include tablet() {
               width: 100%;
+              margin: 10px 0;
             }
         }
         .supply {
@@ -313,11 +317,7 @@
   
   .roadmap {
 	margin-top: -10px;
-	padding-top: 6vw;
-	padding-bottom: 2vw;
-	// background-color: #020202;
-	padding-left: 6vw;
-	padding-right: 6vw;
+	padding: 20px 0;
 	h2 {
 		color: #000;
 		font-size: 70px;
@@ -341,6 +341,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+  width: 100%;
     :global {
         li {
             display: flex;
