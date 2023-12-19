@@ -164,7 +164,7 @@
     a {
       // background-color: #fff;
       display: inline-block;
-      background-color: #3592ff;
+      background-color: rgba(53, 146, 255, 0.6);
       color: #fff;
       padding: 15px 20px;
       margin-right: 10px;
@@ -176,8 +176,8 @@
         font-size: 12px;
       }
       &.active {
-        background-color: #3592ff;
-        box-shadow: 0px 0px 30px 5px #3f99ff;
+        background-color: rgba(53, 146, 255, 0.6);
+        box-shadow: 0px 0px 30px 5px rgba(19, 129, 255, 0.6);
         color: #fff;
         transform: scale(1.05);
       }
