@@ -47,7 +47,7 @@
 
   .tokenomics {
     .gridContainer {
-        width: 100%;
+        width: 110%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -174,7 +174,8 @@
         font-size: 12px;
       }
       &.active {
-        background-color: #0c4281;
+        background-color: #3592ff;
+        box-shadow: 0px 0px 30px 5px #3f99ff;
         color: #fff;
         transform: scale(1.05);
       }
@@ -216,7 +217,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    padding: 120px 0 20px;
+    padding: 10px 20px;
     }
     .menu {
       width: unset;
@@ -277,8 +278,8 @@
     // backdrop-filter: blur(32px);
     justify-content: space-between;
     flex-direction: column;
-    max-width: 100vw;
-    margin: 0 auto;
+    max-width: 110vw;
+    margin:  auto;
     justify-content: flex-end;
     position: relative;
     padding-top: 80px;
@@ -363,7 +364,7 @@
     .textContainer {
         font-size: 20px;
         line-height: 1.5;
-        max-width: 800px;
+        max-width: 1000px;
         margin: 0 auto;
         text-align: center;
         margin-bottom: 10%;

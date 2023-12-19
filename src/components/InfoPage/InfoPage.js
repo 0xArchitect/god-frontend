@@ -41,7 +41,7 @@ const InfoPage = () => {
                 <div className={styles.chatSocial}>
                     <div className={styles.menu} >
                         <Link className={styles.navLink} to="/">Home</Link>
-                        <Link to="/info" className={styles.navLink}>Info</Link>
+                        <Link to="/info" className={styles.active}>Info</Link>
                     </div>
                     <div className={`${styles.social} ${styles.mobileVisible}`}>
                         <Link className='social-link' to="https://twitter.com/" target='_blank' title='Twitter' > <img src={twitter} alt="Twitter" /> </Link>

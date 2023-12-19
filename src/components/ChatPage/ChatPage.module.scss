@@ -350,7 +350,8 @@
       font-size: 12px;
     }
     &.active {
-        background-color: #0c4281;
+      background-color: #3592ff;
+      box-shadow: 0px 0px 30px 5px #3f99ff;
         color: #fff;
         transform: scale(1.05);
     }
