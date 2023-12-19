@@ -289,12 +289,12 @@ export default function ChatProvider({ children }) {
     }
   }, [chatList, isPlaying])
 
-  useEffect(() => {
-    document.body.addEventListener('click', docClick);
-    return () => {
-      document.body.removeEventListener('click', docClick);
-    }
-  }, [chatList, isPlaying])
+  // useEffect(() => {
+  //   document.body.addEventListener('click', docClick);
+  //   return () => {
+  //     document.body.removeEventListener('click', docClick);
+  //   }
+  // }, [chatList, isPlaying])
 
   return <Provider value={contextValue}>{children} </Provider>;
 }
